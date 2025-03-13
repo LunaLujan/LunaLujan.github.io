@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1">
+<title>Te invito a mi festejar mi segundo añito</title>
+<meta property="og:title" content="Te invito a mi festejar mi cumple Nº 2 🎂!"/>
+<meta property="og:image" itemprop="image" content="https://mariocardozo.github.io/tarjeta.png" />
+<meta property="og:description" content="Te espero el día 23/03/2025 a partir de las 18hs 🕕" />
+	<link rel="shortcut icon" href="https://mariocardozo.github.io/favicon.ico" />
+	<link rel="icon" type="image/png" href="https://mariocardozo.github.io/favicon.png" />
+
+<style>
+body{
+	background: #ff000a;
+}
+a {
+	margin: 5px;
+    border-radius: 10px;
+    border: solid 1px #003300;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+	font-family: Verdana;
+	font-size: 20px;
+    background: linear-gradient(0deg, rgba(0,51,0,1) 0%, rgba(0,136,0,1) 100%);
+    color: #FFF;
+    padding: 10px 15px;
+    text-decoration: none;
+	min-width: 75%;
+	max-width: 75%;
+	display:block;
+	vertical-align: middle;
+}
+a span{
+	font-size: 26px;
+	vertical-align: middle;
+}
+a:hover{
+	border: solid 1px #00ff00;
+	background: linear-gradient(0deg, rgba(0,51,0,1) 0%, rgba(0,255,0,1) 100%);
+}
+</style>
+</head>
+<body><center>
+<video onclick="javascript:this.play();" poster="click.png" id="video" width="100%" >
+  <source src="cumple.mp4" type="video/mp4">
+  Tu navegador no permite videos.
+</video>
+
+	<br/><br/>
+<a id="link" href="#">✅ Confirmar asistencia</a>
+<a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Cumple%20N%C2%BA%202%20de%20LUNA%20el%2022%2F03%2F2025%20a%20las%2018%3A00hs&dates=20250323T180000/20250323T210000&details=Te%20esperamos%20para%20pasar%20una%20hermosa%20tarde&location=Av.+9+de+Julio+4450,+H3503+Barranqueras,+Chaco">📅 Agendar evento</a>
+<a href="https://www.google.com/maps/place/Av.+9+de+Julio+4450,+H3503HEC+Barranqueras,+Chaco">🌎 Como llegar</a>
+<script>
+var url_string = window.location;
+var url = new URL(url_string);
+var id = url.searchParams.get("id");
+const btn = document.getElementById('btn');
+var num = '';
+var link = document.getElementById('link');
+	if (id=="TWFtw6E=") {
+		num = "NTQ5MzYyNDIyMDY4Mw==";
+		name = "Mamá";
+	} else if  (id=="UGFww6A=") {
+		num = "NTQ5MzYyNDg3NjEyMQ==";
+		name = "Papá";
+	} else {
+		location.href="https://www.google.com.ar";
+	}
+link.href ="https://api.whatsapp.com/send?phone="+atob(num)+"&text=%E2%9C%85%20Confirmo%20que%20voy%20al%20%0A%F0%9F%8E%88%20Cumplea%C3%B1os%20de%20Luna%20%F0%9F%8E%82%F0%9F%8D%B0%0A%F0%9F%93%85%20Este%2023%20de%20Marzo%0A%F0%9F%95%95%20A%20las%2018%3A00%20Hs%0A%F0%9F%8C%8E%20En%20Av.%209%20de%20Julio%204450%0A%F0%9F%8E%81%20Para%20festejar%20%F0%9F%A5%B3%F0%9F%8E%89%0A%F0%9F%8E%BC%20Y%20cantarle%20su%20Feliz%20Cumple%20%F0%9F%8E%B5%F0%9F%8E%B6";
+link.setAttribute('target', '_blank');
+link.setAttribute('rel', 'noopener noreferrer');
+link.innerText = "✅ Confirmar a " + name ;
+</script>
+</center>
+</body>
+</html>
