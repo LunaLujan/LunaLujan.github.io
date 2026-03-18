@@ -4,20 +4,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1">
 <title>Te invito a mi festejar mi tercer añito</title>
-<meta property="og:title" content="Te invito a mi cumple Nº 3 🎂!"/>
+<meta property="og:title" content="Te invito a mi festejar mi cumple Nº 3 🎂!"/>
 <meta property="og:image" itemprop="image" content="https://lunalujan.github.io/tarjeta.png" />
-<meta property="og:description" content="Te espero el día 22/03 a partir de las 18" />
+<meta property="og:description" content="Te espero el día 22/03/2026 a partir de las 18hs 🕕" />
 	<link rel="shortcut icon" href="https://lunalujan.github.io/favicon.ico" />
 	<link rel="icon" type="image/png" href="https://lunalujan.github.io/favicon.png" />
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Galada&display=swap" rel="stylesheet">
 <style>
 body{
 	background: #679733;
-	background-image: url('https://lunalujan.github.io/fondo.jpg');
-	background-attachment: fixed;
-	background-position: center;
-	background-size: cover;
-	background-repeat: no-repeat;
+	font-family: "Galada", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 24px;
 }
 a {
 	margin: 5px;
@@ -44,6 +45,12 @@ a:hover{
 	border: solid 1px #00ff00;
 	background: linear-gradient(0deg, rgba(0,51,0,1) 0%, rgba(0,255,0,1) 100%);
 }
+#contador{
+	font-family: "Galada", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 48px;
+}
 </style>
 </head>
 <body><center>
@@ -52,7 +59,9 @@ a:hover{
   Tu navegador no permite videos.
 </video>
 
-	<br/><br/>
+	<br/>Faltan...
+	<p id="contador"></p>
+	<br/>
 <a id="link" href="#">✅ Confirmar asistencia</a>
 <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Cumple%20N%C2%BA%203%20de%20LUNA%20el%2022%2F03%2F2026%20a%20las%2018%3A00hs&dates=20260322T180000/20260322T210000&details=Te%20esperamos%20para%20pasar%20una%20hermosa%20tarde&location=Aristobulo+del+valle+3334,+H3508+Resistencia,+Chaco">📅 Agendar evento</a>
 <a href="https://www.google.com/maps/place/Aristobulo+del+valle+3334,+H3508+Resistencia,+Chaco">🌎 Como llegar</a>
@@ -70,12 +79,44 @@ var link = document.getElementById('link');
 		num = "NTQ5MzYyNDg3NjEyMQ==";
 		name = "Papá";
 	} else {
-		location.href="https://www.google.com.ar";
+		//location.href="https://www.google.com.ar";
 	}
 link.href ="https://api.whatsapp.com/send?phone="+atob(num)+"&text=%E2%9C%85%20Confirmo%20que%20voy%20al%20%0A%F0%9F%8E%88%20Cumplea%C3%B1os%20de%20Luna%20%F0%9F%8E%82%F0%9F%8D%B0%0A%F0%9F%93%85%20Este%2022%20de%20Marzo%0A%F0%9F%95%95%20A%20las%2018%3A00%20Hs%0A%F0%9F%8C%8E%20En%20Arist%C3%B3bulo%20del%20Valle%203334%0A%F0%9F%8E%81%20Para%20festejar%20%F0%9F%A5%B3%F0%9F%8E%89%0A%F0%9F%8F%8A%E2%80%8D%E2%99%82%EF%B8%8F%20meterme%20a%20la%20pile%20%F0%9F%A5%BD%F0%9F%9B%9F%0A%F0%9F%8E%BC%20Y%20cantarle%20su%20Feliz%20Cumple%20%F0%9F%8E%B5%F0%9F%8E%B6";
 link.setAttribute('target', '_blank');
 link.setAttribute('rel', 'noopener noreferrer');
 link.innerText = "✅ Confirmar a " + name ;
+
+//countdown
+// 1. Establece la fecha y hora final (Formato: Mes Día, Año HH:MM:SS)
+const countDownDate = new Date("Mar 22, 2026 18:00:00").getTime();
+
+// 2. Actualiza el contador cada 1 segundo
+const x = setInterval(function() {
+
+  // Obtiene la fecha y hora actual
+  const now = new Date().getTime();
+
+  // Encuentra la distancia entre "ahora" y la fecha objetivo
+  const distance = countDownDate - now;
+
+  // Cálculos de tiempo para días, horas, minutos y segundos
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Muestra el resultado en un elemento con id="timer" (o en la consola)
+  document.getElementById("contador").innerHTML = `${days}días ${hours}h ${minutes}m ${seconds}s`;
+  //console.log(`${days}dias ${hours}h ${minutes}m ${seconds}s`);
+
+  // Si la cuenta regresiva termina, escribe un texto
+  if (distance < 0) {
+    clearInterval(x);
+    console.log("¡TIEMPO AGOTADO!");
+  }
+}, 1000);
+
+
 </script>
 </center>
 </body>
