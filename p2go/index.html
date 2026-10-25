@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f8fc">
+  <title>Mi comunicador · Comunicación aumentativa</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark" aria-hidden="true">💬</div>
+    <div class="brand">
+      <h1>Mi comunicador</h1>
+      <p>Mis palabras, mi voz</p>
+    </div>
+    <button id="settingsBtn" class="icon-button" aria-label="Configuración" title="Configuración">⚙️</button>
+  </header>
+
+  <main>
+    <section class="sentence-panel" aria-label="Frase que estoy formando">
+      <div class="sentence-heading">
+        <span>🗣️ Mi frase</span>
+        <span id="wordCount" class="word-count">0 palabras</span>
+      </div>
+      <div id="sentence" class="sentence" aria-live="polite">
+        <span class="placeholder">Tocá los pictogramas para formar una frase…</span>
+      </div>
+      <div class="sentence-actions">
+        <button id="speakBtn" class="action primary" disabled>🔊 Decir frase</button>
+        <button id="undoBtn" class="action secondary" disabled>↩️ Deshacer</button>
+        <button id="clearBtn" class="action secondary" disabled>🗑️ Borrar</button>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <aside class="sidebar" aria-label="Categorías">
+        <h2>Categorías</h2>
+        <nav id="categories" class="categories"></nav>
+      </aside>
+
+      <section class="board-area">
+        <div class="board-heading">
+          <div>
+            <h2 id="boardTitle">Palabras principales</h2>
+            <p id="boardDescription">Elegí una palabra para empezar a comunicarte.</p>
+          </div>
+          <label class="search-box">
+            <span aria-hidden="true">🔎</span>
+            <input id="searchInput" type="search" placeholder="Buscar palabra…" aria-label="Buscar palabra">
+          </label>
+        </div>
+        <div id="board" class="board" aria-label="Tablero de palabras"></div>
+        <p id="emptyState" class="empty-state" hidden>No encontramos palabras. Probá otra búsqueda.</p>
+      </section>
+    </section>
+    <p class="footer-note">Tablero de comunicación aumentativa y alternativa (CAA). Podés personalizar las palabras desde ⚙️.</p>
+  </main>
+
+  <dialog id="settingsDialog">
+    <form method="dialog" id="settingsForm">
+      <div class="dialog-header">
+        <div>
+          <h2>Personalizar comunicador</h2>
+          <p>Adaptá la voz y el tamaño de los pictogramas.</p>
+        </div>
+        <button class="icon-button" value="cancel" aria-label="Cerrar">✕</button>
+      </div>
+      <label class="field-label" for="voiceSelect">Voz disponible en este dispositivo</label>
+      <select id="voiceSelect"><option value="">Voz predeterminada</option></select>
+      <label class="field-label" for="speedRange">Velocidad de la voz <span id="speedValue">0.9×</span></label>
+      <input id="speedRange" type="range" min="0.6" max="1.3" step="0.1" value="0.9">
+      <label class="field-label" for="tileSize">Tamaño de los pictogramas</label>
+      <select id="tileSize">
+        <option value="normal">Normal</option>
+        <option value="large">Grande</option>
+        <option value="xlarge">Muy grande</option>
+      </select>
+      <hr>
+      <h3>Agregar una palabra</h3>
+      <p class="help-text">Se guardará en “Mis palabras” en este navegador.</p>
+      <div class="form-grid">
+        <label>Palabra<input id="newWord" maxlength="30" placeholder="por ejemplo: música"></label>
+        <label>Emoji o símbolo<input id="newEmoji" maxlength="8" placeholder="🎵"></label>
+      </div>
+      <label class="field-label" for="newCategory">Categoría</label>
+      <select id="newCategory">
+        <option value="personal">Mis palabras</option>
+        <option value="acciones">Acciones</option>
+        <option value="personas">Personas</option>
+        <option value="comida">Comida y bebida</option>
+        <option value="emociones">Emociones</option>
+        <option value="lugares">Lugares</option>
+      </select>
+      <button id="addWordBtn" class="action primary full-width" type="button">＋ Agregar palabra</button>
+      <p id="settingsMessage" class="settings-message" aria-live="polite"></p>
+      <div class="dialog-footer">
+        <button class="action secondary" value="cancel">Cerrar</button>
+      </div>
+    </form>
+  </dialog>
+  <script src="app.js"></script>
+</body>
+</html>
