@@ -1,23 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="h-full">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comunicador CAA Pro</title>
-
-    <!-- PWA & Mobile Web App Meta Tags -->
-    <meta name="theme-color" content="#4f46e5">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="CAA Pro">
-    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3062/3062634.png">
-
-    <!-- Inline Web App Manifest (Data URI) -->
-    <link rel="manifest" id="manifest-placeholder">
-
-    <!-- FontAwesome 6 Free CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AAC Communicator Pro - CAA Proloquo2Go</title>
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -26,721 +13,995 @@
             theme: {
                 extend: {
                     colors: {
-                        fitzPeople: '#fef08a',   /* Yellow: Pronouns, People */
-                        fitzAction: '#bbf7d0',   /* Green: Verbs, Actions */
-                        fitzNoun: '#fed7aa',     /* Orange: Nouns, Objects */
-                        fitzAdj: '#bfdbfe',      /* Blue: Adjectives, Feelings */
-                        fitzSocial: '#fbcfe8',   /* Pink: Social, Expressions */
-                        fitzQuestion: '#99f6e4', /* Teal: Questions */
-                        fitzPlace: '#e9d5ff',    /* Purple: Places */
-                        fitzFolder: '#cbd5e1',   /* Slate/Gray: Folders */
+                        fitz: {
+                            yellow: '#fef08a',
+                            green: '#bbf7d0',
+                            orange: '#fed7aa',
+                            blue: '#bfdbfe',
+                            pink: '#fbcfe8',
+                            teal: '#99f6e4',
+                            purple: '#e9d5ff',
+                            slate: '#cbd5e1'
+                        }
                     }
                 }
             }
         }
     </script>
+
+    <!-- FontAwesome 6.5.2 Vector Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- PWA iOS Specific Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="CAA Pro">
+
     <style>
-        /* Custom Fitzgerald Key Card Color Tokens */
-        .tile-fitz-people { background-color: #fef08a; border-color: #fde047; color: #1e293b; }
-        .tile-fitz-action { background-color: #bbf7d0; border-color: #86efac; color: #1e293b; }
-        .tile-fitz-noun { background-color: #fed7aa; border-color: #fdba74; color: #1e293b; }
-        .tile-fitz-adj { background-color: #bfdbfe; border-color: #93c5fd; color: #1e293b; }
-        .tile-fitz-social { background-color: #fbcfe8; border-color: #f472b6; color: #1e293b; }
-        .tile-fitz-question { background-color: #99f6e4; border-color: #5eead4; color: #1e293b; }
-        .tile-fitz-place { background-color: #e9d5ff; border-color: #d8b4fe; color: #1e293b; }
-        .tile-fitz-folder { background-color: #cbd5e1; border-color: #94a3b8; color: #1e293b; }
-
-        /* Dark mode card adjustments for optimal contrast */
-        .dark .tile-fitz-people { background-color: #ca8a04; border-color: #eab308; color: #fef8c3; }
-        .dark .tile-fitz-action { background-color: #15803d; border-color: #22c55e; color: #dcfce7; }
-        .dark .tile-fitz-noun { background-color: #c2410c; border-color: #f97316; color: #ffedd5; }
-        .dark .tile-fitz-adj { background-color: #1d4ed8; border-color: #3b82f6; color: #dbeafe; }
-        .dark .tile-fitz-social { background-color: #be185d; border-color: #ec4899; color: #fce7f3; }
-        .dark .tile-fitz-question { background-color: #0f766e; border-color: #14b8a6; color: #ccfbf1; }
-        .dark .tile-fitz-place { background-color: #6b21a8; border-color: #a855f7; color: #f3e8ff; }
-        .dark .tile-fitz-folder { background-color: #475569; border-color: #64748b; color: #f8fafc; }
-
-        /* High contrast mode overrides */
-        .high-contrast {
-            background-color: #000000 !important;
-            color: #ffffff !important;
+        /* Custom Styles & Scrollbars */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
         }
-        .high-contrast .tile-fitz-people { background-color: #ffff00 !important; border-color: #ffffff !important; color: #000 !important; }
-        .high-contrast .tile-fitz-action { background-color: #00ff00 !important; border-color: #ffffff !important; color: #000 !important; }
-        .high-contrast .tile-fitz-noun { background-color: #ff9900 !important; border-color: #ffffff !important; color: #000 !important; }
-        .high-contrast .tile-fitz-adj { background-color: #00ffff !important; border-color: #ffffff !important; color: #000 !important; }
-        .high-contrast .tile-fitz-social { background-color: #ff00ff !important; border-color: #ffffff !important; color: #000 !important; }
-        .high-contrast .tile-fitz-question { background-color: #00ffff !important; border-color: #ffffff !important; color: #000 !important; }
-        .high-contrast .tile-fitz-place { background-color: #d8b4fe !important; border-color: #ffffff !important; color: #000 !important; }
-        .high-contrast .tile-fitz-folder { background-color: #475569 !important; border-color: #ffffff !important; color: #fff !important; }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(156, 163, 175, 0.5);
+            border-radius: 9999px;
+        }
+        .touch-none {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        
+        /* Fitzgerald Styles Light/Dark Mode */
+        .fitz-yellow { background-color: #fef08a; border-color: #facc15; color: #854d0e; }
+        .fitz-green  { background-color: #bbf7d0; border-color: #4ade80; color: #166534; }
+        .fitz-orange { background-color: #fed7aa; border-color: #fb923c; color: #9a3412; }
+        .fitz-blue   { background-color: #bfdbfe; border-color: #60a5fa; color: #1e40af; }
+        .fitz-pink   { background-color: #fbcfe8; border-color: #f472b6; color: #9d174d; }
+        .fitz-teal   { background-color: #99f6e4; border-color: #2dd4bf; color: #115e59; }
+        .fitz-purple { background-color: #e9d5ff; border-color: #c084fc; color: #6b21a8; }
+        .fitz-slate  { background-color: #e2e8f0; border-color: #94a3b8; color: #334155; }
 
-        /* Smooth animation for sentence strip insertion */
+        .dark .fitz-yellow { background-color: rgba(254, 240, 138, 0.18); border-color: #eab308; color: #fef08a; }
+        .dark .fitz-green  { background-color: rgba(187, 247, 208, 0.18); border-color: #22c55e; color: #bbf7d0; }
+        .dark .fitz-orange { background-color: rgba(254, 215, 170, 0.18); border-color: #f97316; color: #fed7aa; }
+        .dark .fitz-blue   { background-color: rgba(191, 219, 254, 0.18); border-color: #3b82f6; color: #bfdbfe; }
+        .dark .fitz-pink   { background-color: rgba(251, 207, 232, 0.18); border-color: #ec4899; color: #fbcfe8; }
+        .dark .fitz-teal   { background-color: rgba(153, 246, 228, 0.18); border-color: #14b8a6; color: #99f6e4; }
+        .dark .fitz-purple { background-color: rgba(233, 213, 255, 0.18); border-color: #a855f7; color: #e9d5ff; }
+        .dark .fitz-slate  { background-color: rgba(226, 232, 240, 0.15); border-color: #64748b; color: #cbd5e1; }
+
         @keyframes popIn {
-            0% { transform: scale(0.85); opacity: 0; }
+            0% { transform: scale(0.8); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
         }
-        .animate-pop {
-            animation: popIn 0.18s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        .animate-pop-in {
+            animation: popIn 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* Active Speech Glow */
-        @keyframes speakingGlow {
-            0%, 100% { box-shadow: 0 0 0 0rem rgba(34, 197, 94, 0.5); }
-            50% { box-shadow: 0 0 0 0.5rem rgba(34, 197, 94, 0.8); }
+        .speaking-pulse {
+            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.5);
+            animation: pulse-ring 1s infinite;
         }
-        .speaking-active {
-            animation: speakingGlow 1.2s infinite;
-            border-color: #22c55e !important;
+        @keyframes pulse-ring {
+            0% { box-shadow: 0 0 0 0px rgba(34, 197, 94, 0.6); }
+            70% { box-shadow: 0 0 0 12px rgba(34, 197, 94, 0); }
+            100% { box-shadow: 0 0 0 0px rgba(34, 197, 94, 0); }
         }
     </style>
 </head>
-<body class="bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-sans min-h-screen flex flex-col antialiased transition-colors duration-200">
+<body class="h-full bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 flex flex-col font-sans touch-none transition-colors duration-200">
 
-    <!-- Header & Sentence Builder Bar -->
-    <header class="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 shadow-sm sticky top-0 z-30 px-3 py-2 sm:px-6 sm:py-3 transition-colors">
-        <div class="max-w-7xl mx-auto flex flex-col gap-2">
-            <!-- Top Controls Nav -->
-            <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2.5">
-                    <i class="fa-solid fa-comments text-indigo-600 dark:text-indigo-400 text-2xl"></i>
-                    <h1 class="text-lg sm:text-xl font-bold tracking-tight text-slate-800 dark:text-white">Comunicador CAA Pro</h1>
+    <!-- TOP HEADER & SENTENCE STRIP -->
+    <header class="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 p-3 shadow-sm flex flex-col gap-3 flex-shrink-0">
+        <!-- App Title and Actions Bar -->
+        <div class="flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+                <div class="w-9 h-9 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-black text-xl shadow-md">
+                    <i class="fa-solid fa-comments"></i>
                 </div>
-                <div class="flex items-center gap-2">
-                    <!-- PWA Install Button Header -->
-                    <button id="btn-pwa-install-nav" class="hidden px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm rounded-lg transition flex items-center gap-1.5 shadow-sm active:scale-95 animate-pulse">
-                        <i class="fa-solid fa-download"></i>
-                        <span class="hidden sm:inline">Instalar</span>
-                    </button>
-
-                    <!-- Quick Toggle Theme Button -->
-                    <button id="btn-toggle-theme" title="Cambiar Tema" class="px-3 py-1.5 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 font-semibold text-sm rounded-lg border border-slate-300 dark:border-slate-600 transition flex items-center gap-1.5 shadow-sm active:scale-95">
-                        <i id="theme-icon" class="fa-solid fa-moon text-indigo-500"></i>
-                        <span id="theme-label" class="hidden sm:inline">Tema</span>
-                    </button>
-                    <!-- Settings Modal Trigger -->
-                    <button id="btn-settings" class="px-3 py-1.5 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 font-semibold text-sm rounded-lg border border-slate-300 dark:border-slate-600 transition flex items-center gap-1.5 shadow-sm active:scale-95">
-                        <i class="fa-solid fa-gear text-slate-600 dark:text-slate-300"></i>
-                        <span>Ajustes</span>
-                    </button>
+                <div>
+                    <h1 class="font-bold text-slate-800 dark:text-white text-base sm:text-lg leading-tight">AAC Communicator Pro</h1>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">CAA Proloquo2Go en Español</p>
                 </div>
             </div>
 
-            <!-- PWA Install Banner Notice -->
-            <div id="pwa-banner" class="hidden bg-indigo-600 text-white p-3 rounded-xl flex items-center justify-between gap-2 text-sm shadow-md transition-all">
-                <div class="flex items-center gap-2.5">
-                    <i class="fa-solid fa-mobile-screen-button text-xl"></i>
-                    <span><strong>¡Instala la App!</strong> Añade el Comunicador a tu pantalla de inicio para usarlo sin conexión.</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <button id="btn-pwa-banner-install" class="bg-white text-indigo-700 font-bold px-3 py-1 rounded-lg hover:bg-indigo-50 transition text-xs uppercase tracking-wide">
-                        Instalar
-                    </button>
-                    <button id="btn-pwa-banner-dismiss" class="text-indigo-200 hover:text-white px-1.5 text-lg font-bold">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                </div>
+            <!-- Header Quick Controls -->
+            <div class="flex items-center gap-1.5 sm:gap-2">
+                <!-- Quick Add Custom Tile -->
+                <button id="btnOpenAddModal" class="px-3 py-2 bg-indigo-50 dark:bg-slate-700 hover:bg-indigo-100 dark:hover:bg-slate-600 text-indigo-600 dark:text-indigo-300 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition-colors border border-indigo-200 dark:border-slate-600">
+                    <i class="fa-solid fa-plus text-sm"></i>
+                    <span class="hidden sm:inline">Crear Card</span>
+                </button>
+
+                <!-- Quick Theme Toggle -->
+                <button id="btnQuickTheme" class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 flex items-center justify-center text-slate-600 dark:text-amber-400 transition-colors border border-slate-200 dark:border-slate-600" title="Cambiar Tema">
+                    <i class="fa-solid fa-sun text-base" id="themeIcon"></i>
+                </button>
+
+                <!-- PWA Install Button (Hidden by default) -->
+                <button id="btnInstallPwa" class="hidden px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-sm">
+                    <i class="fa-solid fa-download"></i>
+                    <span class="hidden sm:inline">Instalar App</span>
+                </button>
+
+                <!-- Settings Button -->
+                <button id="btnOpenSettings" class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 flex items-center justify-center text-slate-600 dark:text-slate-200 transition-colors border border-slate-200 dark:border-slate-600" title="Ajustes">
+                    <i class="fa-solid fa-gear text-base"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- SENTENCE STRIP CONTAINER -->
+        <div id="sentenceContainer" class="bg-slate-50 dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-700 rounded-2xl p-2 min-h-[82px] flex items-center gap-2 transition-all">
+            <!-- Scrollable Selected Tiles -->
+            <div id="sentenceStrip" class="flex-1 flex items-center gap-2 overflow-x-auto min-h-[66px] py-1 px-1">
+                <span id="emptyStripPlaceholder" class="text-slate-400 dark:text-slate-500 text-xs sm:text-sm font-medium italic pl-2">
+                    Toca las tarjetas abajo para construir tu frase...
+                </span>
             </div>
 
-            <!-- Sentence Strip Bar -->
-            <div id="sentence-container" class="flex items-center gap-2 bg-slate-50 dark:bg-slate-900 border-2 border-slate-300 dark:border-slate-700 rounded-xl p-2 min-h-[82px] transition-all">
-                <!-- Visual Cards Box -->
-                <div id="sentence-strip" class="flex-1 flex items-center gap-2 overflow-x-auto min-h-[66px] scrollbar-thin py-1">
-                    <span id="placeholder-text" class="text-slate-400 dark:text-slate-500 font-medium italic text-sm ml-2">Haz clic en los pictogramas para construir una oración...</span>
-                </div>
+            <!-- Sentence Controls -->
+            <div class="flex items-center gap-1.5 flex-shrink-0">
+                <button id="btnSpeak" class="h-16 px-4 sm:px-6 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl flex flex-col items-center justify-center gap-0.5 shadow-md shadow-emerald-600/20 active:scale-95 transition-all">
+                    <i class="fa-solid fa-volume-high text-xl"></i>
+                    <span class="text-[10px] tracking-wide uppercase">HABLAR</span>
+                </button>
 
-                <!-- Action Controls -->
-                <div class="flex items-center gap-1.5 shrink-0">
-                    <button id="btn-speak" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold h-16 px-4 sm:px-6 rounded-lg transition shadow-md active:scale-95 flex flex-col items-center justify-center gap-1">
-                        <i class="fa-solid fa-volume-high text-xl"></i>
-                        <span class="text-[10px] sm:text-xs uppercase tracking-wider">HABLAR</span>
-                    </button>
-                    <button id="btn-backspace" title="Borrar último" class="bg-amber-500 hover:bg-amber-600 text-white font-bold h-16 px-3 sm:px-4 rounded-lg transition shadow-md active:scale-95 flex items-center justify-center text-lg">
-                        <i class="fa-solid fa-delete-left"></i>
-                    </button>
-                    <button id="btn-clear" title="Limpiar todo" class="bg-rose-600 hover:bg-rose-700 text-white font-bold h-16 px-3 sm:px-4 rounded-lg transition shadow-md active:scale-95 flex items-center justify-center text-lg">
-                        <i class="fa-solid fa-trash-can"></i>
-                    </button>
-                </div>
+                <button id="btnBackspace" class="h-16 w-12 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 font-bold rounded-xl flex items-center justify-center active:scale-95 transition-all border border-slate-300 dark:border-slate-600" title="Borrar último">
+                    <i class="fa-solid fa-delete-left text-lg"></i>
+                </button>
+
+                <button id="btnClear" class="h-16 w-12 bg-rose-100 dark:bg-rose-950/40 hover:bg-rose-200 dark:hover:bg-rose-900/60 text-rose-600 dark:text-rose-400 font-bold rounded-xl flex items-center justify-center active:scale-95 transition-all border border-rose-200 dark:border-rose-900/50" title="Limpiar todo">
+                    <i class="fa-solid fa-trash-can text-lg"></i>
+                </button>
             </div>
         </div>
     </header>
 
-    <!-- Sub-bar Navigation & Live Search -->
-    <nav class="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 px-3 py-2 sm:px-6 shadow-inner transition-colors">
-        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
-            <!-- Breadcrumb Trail -->
-            <div class="flex items-center gap-2 text-sm font-bold text-slate-700 dark:text-slate-200">
-                <button id="btn-home" class="px-3 py-1.5 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 border border-slate-300 dark:border-slate-600 rounded-lg flex items-center gap-1.5 transition shadow-sm active:scale-95">
-                    <i class="fa-solid fa-house text-indigo-600 dark:text-indigo-400"></i>
-                    <span>Inicio</span>
-                </button>
-                <span class="text-slate-400 dark:text-slate-500">/</span>
-                <span id="current-folder-label" class="text-indigo-600 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-950/60 px-2.5 py-1 rounded-md border border-indigo-100 dark:border-indigo-900">Inicio</span>
-            </div>
-
-            <!-- Search Field -->
-            <div class="relative flex-1 max-w-xs sm:max-w-sm">
-                <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 dark:text-slate-500 text-sm"></i>
-                <input type="text" id="search-input" placeholder="Buscar pictograma..." class="w-full pl-9 pr-3 py-1.5 text-sm border border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100">
-            </div>
-        </div>
-    </nav>
-
-    <!-- Main AAC Grid Display -->
-    <main class="flex-1 max-w-7xl w-full mx-auto p-3 sm:p-6 overflow-y-auto">
-        <div id="grid-container" class="grid grid-cols-4 gap-2.5 sm:gap-4 transition-all">
-            <!-- Tiles rendered dynamically via JavaScript -->
-        </div>
-    </main>
-
-    <!-- Settings Modal -->
-    <div id="settings-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-md p-6 flex flex-col gap-5 animate-pop text-slate-800 dark:text-slate-100">
-            <div class="flex items-center justify-between border-b dark:border-slate-700 pb-3">
-                <h2 class="text-lg font-bold flex items-center gap-2">
-                    <i class="fa-solid fa-sliders text-indigo-600 dark:text-indigo-400"></i> Ajustes y Accesibilidad
-                </h2>
-                <button id="btn-close-settings-x" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xl font-bold p-1">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <!-- Theme Selector -->
-            <div class="flex flex-col gap-1.5">
-                <label for="theme-select" class="text-sm font-semibold">Tema Visual:</label>
-                <select id="theme-select" class="w-full p-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-slate-50 dark:bg-slate-900 text-sm font-medium focus:ring-2 focus:ring-indigo-500">
-                    <option value="light">Claro ☀️</option>
-                    <option value="dark">Oscuro 🌙</option>
-                    <option value="system">Sistema 🖥️</option>
-                </select>
-            </div>
-
-            <!-- Grid Columns Layout -->
-            <div class="flex flex-col gap-1.5">
-                <label for="grid-size" class="text-sm font-semibold">Columnas de Rejilla:</label>
-                <select id="grid-size" class="w-full p-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-slate-50 dark:bg-slate-900 text-sm font-medium focus:ring-2 focus:ring-indigo-500">
-                    <option value="3">3 Columnas (Grande)</option>
-                    <option value="4" selected>4 Columnas (Estándar)</option>
-                    <option value="5">5 Columnas (Compacto)</option>
-                </select>
-            </div>
-
-            <!-- Speech Voice Selector -->
-            <div class="flex flex-col gap-1.5">
-                <label for="voice-select" class="text-sm font-semibold">Voz de Síntesis:</label>
-                <select id="voice-select" class="w-full p-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-slate-50 dark:bg-slate-900 text-sm font-medium focus:ring-2 focus:ring-indigo-500">
-                    <!-- Populated dynamically -->
-                </select>
-            </div>
-
-            <!-- Speech Speed -->
-            <div class="flex flex-col gap-1.5">
-                <div class="flex justify-between text-sm font-semibold">
-                    <label for="voice-rate">Velocidad de Lectura:</label>
-                    <span id="rate-value">1.0x</span>
-                </div>
-                <input type="range" id="voice-rate" min="0.5" max="1.5" step="0.1" value="1.0" class="w-full accent-indigo-600">
-            </div>
-
-            <!-- Accessibility Toggles -->
-            <div class="flex flex-col gap-3 pt-2 border-t dark:border-slate-700">
-                <label class="flex items-center justify-between cursor-pointer">
-                    <span class="text-sm font-semibold">Modo Alto Contraste</span>
-                    <input type="checkbox" id="toggle-contrast" class="w-5 h-5 accent-indigo-600 rounded">
-                </label>
-                <label class="flex items-center justify-between cursor-pointer">
-                    <span class="text-sm font-semibold">Pronunciar al tocar elemento</span>
-                    <input type="checkbox" id="toggle-instant-speak" checked class="w-5 h-5 accent-indigo-600 rounded">
-                </label>
-            </div>
-
-            <!-- Manual PWA Installation Guide Section -->
-            <div class="pt-3 border-t dark:border-slate-700 flex flex-col gap-2">
-                <span class="text-sm font-semibold flex items-center gap-2">
-                    <i class="fa-solid fa-house-laptop text-indigo-500"></i> Acceso Directo (PWA):
-                </span>
-                <button id="btn-pwa-install-modal" class="hidden w-full py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg transition text-xs uppercase tracking-wide flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-download"></i> Instalar en la Pantalla de Inicio
-                </button>
-                <p id="ios-install-instructions" class="text-xs text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-900 p-2.5 rounded-lg leading-relaxed">
-                    <strong>En iPhone/iPad (Safari):</strong> Pulsa el botón <strong>Compartir <i class="fa-solid fa-share-from-square text-indigo-500"></i></strong> y selecciona <strong>"Añadir a la pantalla de inicio <i class="fa-regular fa-square-plus text-indigo-500"></i>"</strong>.
-                </p>
-            </div>
-
-            <button id="btn-close-settings" class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition shadow-md mt-2">
-                Guardar y Cerrar
+    <!-- NAVIGATION & SEARCH BAR -->
+    <div class="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 px-3 py-2 flex items-center justify-between gap-3 flex-shrink-0">
+        <!-- Breadcrumbs -->
+        <div class="flex items-center gap-2 overflow-hidden">
+            <button id="btnHome" class="px-3 py-1.5 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-lg text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-200 flex items-center gap-1.5 transition-colors flex-shrink-0 border border-slate-200 dark:border-slate-600">
+                <i class="fa-solid fa-house text-indigo-600 dark:text-indigo-400"></i>
+                <span>Inicio</span>
             </button>
+            <span id="folderBreadcrumb" class="text-xs sm:text-sm font-semibold text-slate-500 dark:text-slate-400 truncate">
+                / Inicio
+            </span>
+        </div>
+
+        <!-- Global Search Input -->
+        <div class="relative max-w-[220px] sm:max-w-[280px] w-full">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+            <input type="text" id="searchInput" placeholder="Buscar pictograma..." class="w-full pl-8 pr-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
         </div>
     </div>
 
+    <!-- MAIN GRID CONTAINER -->
+    <main class="flex-1 p-3 overflow-y-auto">
+        <div id="gridContainer" class="grid gap-2.5 max-w-6xl mx-auto auto-rows-fr">
+            <!-- Dynamic Tiles Generated Here -->
+        </div>
+    </main>
+
+    <!-- MODAL: CREAR / EDITAR PICTOGRAMA -->
+    <div id="modalAddCard" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-md w-full p-5 sm:p-6 shadow-2xl transition-all border border-slate-200 dark:border-slate-700 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold text-slate-800 dark:text-white flex items-center gap-2">
+                    <i class="fa-solid fa-plus-circle text-indigo-600 dark:text-indigo-400"></i>
+                    Crear Pictograma
+                </h3>
+                <button id="btnCloseAddModal" class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500 transition-colors">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <form id="formAddCard" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1">Palabra / Texto</label>
+                    <input type="text" id="inputCardLabel" required placeholder="Ej: Manzana, Jugar, Casa..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1">Ubicación / Categoría</label>
+                    <select id="selectCardCategory" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                        <option value="home">Principal (Inicio)</option>
+                        <option value="acciones">Acciones</option>
+                        <option value="comida">Comida y Bebida</option>
+                        <option value="personas">Personas</option>
+                        <option value="lugares">Lugares</option>
+                        <option value="emociones">Emociones</option>
+                        <option value="social">Social</option>
+                        <option value="preguntas">Preguntas</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1.5">Color Clave Fitzgerald</label>
+                    <div id="fitzPalette" class="grid grid-cols-4 gap-2">
+                        <button type="button" data-fitz="fitz-yellow" class="fitz-palette-btn h-9 rounded-lg bg-yellow-200 border-2 border-yellow-400 text-[11px] font-bold text-yellow-900 hover:scale-105 transition-all">Sujetos</button>
+                        <button type="button" data-fitz="fitz-green" class="fitz-palette-btn h-9 rounded-lg bg-emerald-200 border-2 border-emerald-400 text-[11px] font-bold text-emerald-900 hover:scale-105 transition-all">Acciones</button>
+                        <button type="button" data-fitz="fitz-orange" class="fitz-palette-btn h-9 rounded-lg bg-orange-200 border-2 border-orange-400 text-[11px] font-bold text-orange-900 hover:scale-105 transition-all">Objetos</button>
+                        <button type="button" data-fitz="fitz-blue" class="fitz-palette-btn h-9 rounded-lg bg-sky-200 border-2 border-sky-400 text-[11px] font-bold text-sky-900 hover:scale-105 transition-all">Adjetivos</button>
+                        <button type="button" data-fitz="fitz-pink" class="fitz-palette-btn h-9 rounded-lg bg-pink-200 border-2 border-pink-400 text-[11px] font-bold text-pink-900 hover:scale-105 transition-all">Social</button>
+                        <button type="button" data-fitz="fitz-teal" class="fitz-palette-btn h-9 rounded-lg bg-teal-200 border-2 border-teal-400 text-[11px] font-bold text-teal-900 hover:scale-105 transition-all">Pregunta</button>
+                        <button type="button" data-fitz="fitz-purple" class="fitz-palette-btn h-9 rounded-lg bg-purple-200 border-2 border-purple-400 text-[11px] font-bold text-purple-900 hover:scale-105 transition-all">Lugares</button>
+                        <button type="button" data-fitz="fitz-slate" class="fitz-palette-btn h-9 rounded-lg bg-slate-200 border-2 border-slate-400 text-[11px] font-bold text-slate-900 hover:scale-105 transition-all">Otro</button>
+                    </div>
+                    <input type="hidden" id="inputCardFitz" value="fitz-yellow">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1">Ícono Vectorial</label>
+                    <div class="flex items-center gap-3">
+                        <button type="button" id="btnOpenIconPicker" class="flex-1 px-4 py-2.5 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 border border-slate-300 dark:border-slate-600 rounded-xl text-left flex items-center justify-between transition-colors">
+                            <span class="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200">Elegir de la Galería...</span>
+                            <i class="fa-solid fa-chevron-right text-xs text-slate-400"></i>
+                        </button>
+                        <div id="previewSelectedIcon" class="w-11 h-11 rounded-xl bg-indigo-50 dark:bg-slate-900 border-2 border-indigo-200 dark:border-indigo-800 flex items-center justify-center text-indigo-600 dark:text-indigo-400 text-xl flex-shrink-0">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+                    <input type="hidden" id="inputCardIcon" value="fa-star">
+                </div>
+
+                <div class="pt-2 flex gap-3">
+                    <button type="button" id="btnCancelAddModal" class="flex-1 py-2.5 px-4 rounded-xl border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 text-xs sm:text-sm font-bold transition-colors">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="flex-1 py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-bold shadow-md transition-colors">
+                        Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: SELECTOR VISUAL DE ÍCONOS -->
+    <div id="modalIconPicker" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-lg w-full p-5 shadow-2xl transition-all border border-slate-200 dark:border-slate-700 max-h-[85vh] flex flex-col">
+            <div class="flex justify-between items-center mb-3 flex-shrink-0">
+                <h3 class="text-base font-bold text-slate-800 dark:text-white flex items-center gap-2">
+                    <i class="fa-solid fa-icons text-indigo-600 dark:text-indigo-400"></i>
+                    Galería de Íconos Vectoriales
+                </h3>
+                <button id="btnCloseIconPicker" class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500 transition-colors">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <div class="relative mb-3 flex-shrink-0">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                <input type="text" id="iconSearchInput" placeholder="Buscar por palabra clave (ej. agua, casa, feliz, comer...)" class="w-full pl-9 pr-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            </div>
+
+            <div id="iconGridContainer" class="grid grid-cols-5 sm:grid-cols-6 gap-2 overflow-y-auto p-1 flex-1 min-h-[260px]">
+                <!-- Dynamic Icons Grid -->
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: AJUSTES -->
+    <div id="modalSettings" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-md w-full p-5 sm:p-6 shadow-2xl transition-all border border-slate-200 dark:border-slate-700 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold text-slate-800 dark:text-white flex items-center gap-2">
+                    <i class="fa-solid fa-sliders text-indigo-600 dark:text-indigo-400"></i>
+                    Ajustes y Configuración
+                </h3>
+                <button id="btnCloseSettings" class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-500 transition-colors">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <div class="space-y-4">
+                <!-- Theme Option -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1.5">Tema de Color</label>
+                    <div class="grid grid-cols-3 gap-2">
+                        <button type="button" data-theme="light" class="theme-select-btn py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-600 text-xs font-bold flex flex-col items-center gap-1 hover:bg-slate-100 dark:hover:bg-slate-700">
+                            <i class="fa-solid fa-sun text-amber-500 text-base"></i> Claro
+                        </button>
+                        <button type="button" data-theme="dark" class="theme-select-btn py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-600 text-xs font-bold flex flex-col items-center gap-1 hover:bg-slate-100 dark:hover:bg-slate-700">
+                            <i class="fa-solid fa-moon text-indigo-400 text-base"></i> Oscuro
+                        </button>
+                        <button type="button" data-theme="system" class="theme-select-btn py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-600 text-xs font-bold flex flex-col items-center gap-1 hover:bg-slate-100 dark:hover:bg-slate-700">
+                            <i class="fa-solid fa-desktop text-slate-400 text-base"></i> Auto
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Grid Columns -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1">Tamaño de Rejilla</label>
+                    <select id="settingGridCols" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 text-xs sm:text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                        <option value="3">3 Columnas (Grande)</option>
+                        <option value="4" selected>4 Columnas (Estándar)</option>
+                        <option value="5">5 Columnas (Compacto)</option>
+                    </select>
+                </div>
+
+                <!-- Speech Options -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1">Voz (Síntesis de Voz)</label>
+                    <select id="settingVoiceSelect" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 text-xs sm:text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                    </select>
+                </div>
+
+                <div>
+                    <div class="flex justify-between items-center mb-1">
+                        <label class="text-xs font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider">Velocidad de Lectura</label>
+                        <span id="rateValueDisplay" class="text-xs font-semibold text-indigo-600 dark:text-indigo-400">1.0x</span>
+                    </div>
+                    <input type="range" id="settingVoiceRate" min="0.5" max="1.5" step="0.1" value="1.0" class="w-full accent-indigo-600">
+                </div>
+
+                <!-- Manage Custom Cards -->
+                <div class="pt-2 border-t border-slate-200 dark:border-slate-700">
+                    <button id="btnManageCustom" class="w-full py-2.5 px-4 rounded-xl bg-rose-50 dark:bg-rose-950/30 hover:bg-rose-100 dark:hover:bg-rose-900/50 text-rose-600 dark:text-rose-400 text-xs sm:text-sm font-bold border border-rose-200 dark:border-rose-900/50 transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-trash-alt"></i>
+                        Restablecer Tarjetas Personalizadas
+                    </button>
+                </div>
+
+                <!-- PWA Installation Info in Settings -->
+                <div class="p-3 bg-indigo-50 dark:bg-slate-900/60 rounded-xl border border-indigo-100 dark:border-slate-700 text-xs text-slate-600 dark:text-slate-400 space-y-1">
+                    <p class="font-bold text-indigo-900 dark:text-indigo-300"><i class="fa-solid fa-mobile-screen-button"></i> Acceso Directo (PWA)</p>
+                    <p>En Android/Chrome, pulsa "Instalar App". En iPhone/iPad (Safari), toca el botón Compartir y selecciona "Agregar a inicio".</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        /* ----------------------------------------------------
-         * Progressive Web App (PWA) & Service Worker Setup
-         * ---------------------------------------------------- */
-        
-        // Dynamic Manifest Injection using Data URI
-        const manifestData = {
-            name: "Comunicador CAA Pro",
-            short_name: "CAA Pro",
-            description: "Comunicador de Comunicación Aumentativa y Alternativa (CAA)",
-            start_url: "./",
-            display: "standalone",
-            background_color: "#0f172a",
-            theme_color: "#4f46e5",
-            icons: [
-                {
-                    src: "https://cdn-icons-png.flaticon.com/512/3062/3062634.png",
-                    sizes: "512x512",
-                    type: "image/png",
-                    purpose: "any maskable"
-                }
-            ]
-        };
-        const manifestBlob = new Blob([JSON.stringify(manifestData)], { type: 'application/json' });
-        document.getElementById('manifest-placeholder').setAttribute('href', URL.createObjectURL(manifestBlob));
+        // ==========================================
+        // 1. DATA DATABASE & VOCABULARY
+        // ==========================================
+        const DEFAULT_VOCABULARY = [
+            // Core People / Pronouns (Yellow)
+            { id: 'yo', label: 'Yo', icon: 'fa-user', fitz: 'fitz-yellow', category: 'home' },
+            { id: 'tu', label: 'Tú', icon: 'fa-hand-pointer', fitz: 'fitz-yellow', category: 'home' },
+            { id: 'nosotros', label: 'Nosotros', icon: 'fa-users', fitz: 'fitz-yellow', category: 'home' },
 
-        // Inline Service Worker Blob Registration for offline support
-        if ('serviceWorker' in navigator) {
-            const swCode = `
-                const CACHE_NAME = 'caa-pro-v1';
-                self.addEventListener('install', (e) => {
-                    self.skipWaiting();
-                });
-                self.addEventListener('activate', (e) => {
-                    e.waitUntil(clients.claim());
-                });
-                self.addEventListener('fetch', (e) => {
-                    e.respondWith(
-                        fetch(e.request).catch(() => caches.match(e.request))
-                    );
-                });
-            `;
-            const swBlob = new Blob([swCode], { type: 'text/javascript' });
-            const swUrl = URL.createObjectURL(swBlob);
-            
-            navigator.serviceWorker.register(swUrl)
-                .then(() => console.log('Service Worker PWA registrado con éxito.'))
-                .catch(err => console.error('Error al registrar Service Worker:', err));
-        }
+            // Core Actions (Green)
+            { id: 'quiero', label: 'Quiero', icon: 'fa-hand-holding-heart', fitz: 'fitz-green', category: 'home' },
+            { id: 'me_gusta', label: 'Me gusta', icon: 'fa-thumbs-up', fitz: 'fitz-green', category: 'home' },
+            { id: 'ir', label: 'Ir', icon: 'fa-person-walking', fitz: 'fitz-green', category: 'home' },
+            { id: 'parar', label: 'Parar', icon: 'fa-hand', fitz: 'fitz-green', category: 'home' },
+            { id: 'comer', label: 'Comer', icon: 'fa-utensils', fitz: 'fitz-green', category: 'home' },
+            { id: 'beber', label: 'Beber', icon: 'fa-glass-water', fitz: 'fitz-green', category: 'home' },
+            { id: 'jugar', label: 'Jugar', icon: 'fa-gamepad', fitz: 'fitz-green', category: 'home' },
 
-        // PWA Installation Prompt Deferred Event Handler
-        let deferredPrompt;
-        const btnPwaNav = document.getElementById('btn-pwa-install-nav');
-        const btnPwaBanner = document.getElementById('btn-pwa-banner-install');
-        const btnPwaModal = document.getElementById('btn-pwa-install-modal');
-        const pwaBanner = document.getElementById('pwa-banner');
-        const btnBannerDismiss = document.getElementById('btn-pwa-banner-dismiss');
+            // Core Social (Pink)
+            { id: 'hola', label: 'Hola', icon: 'fa-hand-wave', fitz: 'fitz-pink', category: 'home' },
+            { id: 'gracias', label: 'Gracias', icon: 'fa-heart', fitz: 'fitz-pink', category: 'home' },
+            { id: 'si', label: 'Sí', icon: 'fa-circle-check', fitz: 'fitz-pink', category: 'home' },
+            { id: 'no', label: 'No', icon: 'fa-circle-xmark', fitz: 'fitz-pink', category: 'home' },
 
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
+            // Folders (Slate - Special Category Nav)
+            { id: 'f_acciones', label: 'Acciones', icon: 'fa-bolt', fitz: 'fitz-slate', isFolder: true, folderId: 'acciones', category: 'home' },
+            { id: 'f_comida', label: 'Comida', icon: 'fa-apple-whole', fitz: 'fitz-slate', isFolder: true, folderId: 'comida', category: 'home' },
+            { id: 'f_personas', label: 'Personas', icon: 'fa-users-between-lines', fitz: 'fitz-slate', isFolder: true, folderId: 'personas', category: 'home' },
+            { id: 'f_lugares', label: 'Lugares', icon: 'fa-house-user', fitz: 'fitz-slate', isFolder: true, folderId: 'lugares', category: 'home' },
+            { id: 'f_emociones', label: 'Emociones', icon: 'fa-face-smile', fitz: 'fitz-slate', isFolder: true, folderId: 'emociones', category: 'home' },
+            { id: 'f_preguntas', label: 'Preguntas', icon: 'fa-circle-question', fitz: 'fitz-slate', isFolder: true, folderId: 'preguntas', category: 'home' },
 
-            // Show install buttons
-            if (btnPwaNav) btnPwaNav.classList.remove('hidden');
-            if (btnPwaModal) btnPwaModal.classList.remove('hidden');
-            if (pwaBanner && !sessionStorage.getItem('pwa_banner_dismissed')) {
-                pwaBanner.classList.remove('hidden');
-            }
-        });
+            // Subcategory Items
+            // Acciones
+            { id: 'dormir', label: 'Dormir', icon: 'fa-bed', fitz: 'fitz-green', category: 'acciones' },
+            { id: 'ver', label: 'Ver', icon: 'fa-eye', fitz: 'fitz-green', category: 'acciones' },
+            { id: 'escuchar', label: 'Escuchar', icon: 'fa-ear-listen', fitz: 'fitz-green', category: 'acciones' },
+            { id: 'lavar', label: 'Lavar', icon: 'fa-hands-wash', fitz: 'fitz-green', category: 'acciones' },
+            { id: 'leer', label: 'Leer', icon: 'fa-book-open', fitz: 'fitz-green', category: 'acciones' },
+            { id: 'necesito', label: 'Necesito', icon: 'fa-triangle-exclamation', fitz: 'fitz-green', category: 'acciones' },
 
-        async function triggerPwaInstall() {
-            if (!deferredPrompt) return;
-            deferredPrompt.prompt();
-            const { outcome } = await deferredPrompt.userChoice;
-            if (outcome === 'accepted') {
-                console.log('El usuario instaló la PWA');
-            }
-            deferredPrompt = null;
-            if (btnPwaNav) btnPwaNav.classList.add('hidden');
-            if (btnPwaModal) btnPwaModal.classList.add('hidden');
-            if (pwaBanner) pwaBanner.classList.add('hidden');
-        }
+            // Comida
+            { id: 'agua', label: 'Agua', icon: 'fa-bottle-water', fitz: 'fitz-orange', category: 'comida' },
+            { id: 'manzana', label: 'Manzana', icon: 'fa-apple-whole', fitz: 'fitz-orange', category: 'comida' },
+            { id: 'pan', label: 'Pan', icon: 'fa-bread-slice', fitz: 'fitz-orange', category: 'comida' },
+            { id: 'leche', label: 'Leche', icon: 'fa-cow', fitz: 'fitz-orange', category: 'comida' },
+            { id: 'jugo', label: 'Jugo', icon: 'fa-wine-glass', fitz: 'fitz-orange', category: 'comida' },
+            { id: 'pizza', label: 'Pizza', icon: 'fa-pizza-slice', fitz: 'fitz-orange', category: 'comida' },
+            { id: 'galleta', label: 'Galleta', icon: 'fa-cookie', fitz: 'fitz-orange', category: 'comida' },
 
-        if (btnPwaNav) btnPwaNav.addEventListener('click', triggerPwaInstall);
-        if (btnPwaBanner) btnPwaBanner.addEventListener('click', triggerPwaInstall);
-        if (btnPwaModal) btnPwaModal.addEventListener('click', triggerPwaInstall);
+            // Personas
+            { id: 'mama', label: 'Mamá', icon: 'fa-person-dress', fitz: 'fitz-yellow', category: 'personas' },
+            { id: 'papa', label: 'Papá', icon: 'fa-person', fitz: 'fitz-yellow', category: 'personas' },
+            { id: 'profesor', label: 'Profesor', icon: 'fa-chalkboard-user', fitz: 'fitz-yellow', category: 'personas' },
+            { id: 'doctor', label: 'Doctor', icon: 'fa-user-doctor', fitz: 'fitz-yellow', category: 'personas' },
+            { id: 'hermano', label: 'Hermano', icon: 'fa-child', fitz: 'fitz-yellow', category: 'personas' },
 
-        if (btnBannerDismiss) {
-            btnBannerDismiss.addEventListener('click', () => {
-                pwaBanner.classList.add('hidden');
-                sessionStorage.setItem('pwa_banner_dismissed', 'true');
-            });
-        }
+            // Lugares
+            { id: 'casa', label: 'Casa', icon: 'fa-house', fitz: 'fitz-purple', category: 'lugares' },
+            { id: 'escuela', label: 'Escuela', icon: 'fa-school', fitz: 'fitz-purple', category: 'lugares' },
+            { id: 'parque', label: 'Parque', icon: 'fa-tree', fitz: 'fitz-purple', category: 'lugares' },
+            { id: 'bano', label: 'Baño', icon: 'fa-toilet', fitz: 'fitz-purple', category: 'lugares' },
+            { id: 'hospital', label: 'Hospital', icon: 'fa-hospital', fitz: 'fitz-purple', category: 'lugares' },
 
-        /* AAC Core Vocabulary Database with Fitzgerald Key styling and verified FontAwesome Free icons */
-        const coreVocabulary = [
-            // Personas (Amarillo)
-            { id: 'yo', label: 'Yo', icon: 'fa-user', fitz: 'tile-fitz-people' },
-            { id: 'tu', label: 'Tú', icon: 'fa-hand-pointer', fitz: 'tile-fitz-people' },
-            { id: 'nosotros', label: 'Nosotros', icon: 'fa-users', fitz: 'tile-fitz-people' },
+            // Emociones
+            { id: 'feliz', label: 'Feliz', icon: 'fa-face-smile', fitz: 'fitz-blue', category: 'emociones' },
+            { id: 'triste', label: 'Triste', icon: 'fa-face-sad-tear', fitz: 'fitz-blue', category: 'emociones' },
+            { id: 'cansado', label: 'Cansado', icon: 'fa-face-tired', fitz: 'fitz-blue', category: 'emociones' },
+            { id: 'enojado', label: 'Enojado', icon: 'fa-face-angry', fitz: 'fitz-blue', category: 'emociones' },
 
-            // Acciones (Verde)
-            { id: 'quiero', label: 'Quiero', icon: 'fa-heart', fitz: 'tile-fitz-action' },
-            { id: 'me_gusta', label: 'Me gusta', icon: 'fa-thumbs-up', fitz: 'tile-fitz-action' },
-            { id: 'ir', label: 'Ir', icon: 'fa-person-walking', fitz: 'tile-fitz-action' },
-            { id: 'parar', label: 'Parar', icon: 'fa-hand', fitz: 'tile-fitz-action' },
-            { id: 'comer', label: 'Comer', icon: 'fa-utensils', fitz: 'tile-fitz-action' },
-            { id: 'beber', label: 'Beber', icon: 'fa-glass-water', fitz: 'tile-fitz-action' },
-            { id: 'jugar', label: 'Jugar', icon: 'fa-gamepad', fitz: 'tile-fitz-action' },
-
-            // Adjetivos / Sentimientos (Azul)
-            { id: 'mas', label: 'Más', icon: 'fa-plus', fitz: 'tile-fitz-adj' },
-            { id: 'bien', label: 'Bien', icon: 'fa-face-smile', fitz: 'tile-fitz-adj' },
-            { id: 'mal', label: 'Mal', icon: 'fa-face-frown', fitz: 'tile-fitz-adj' },
-
-            // Social (Rosa)
-            { id: 'hola', label: 'Hola', icon: 'fa-hand-sparkles', fitz: 'tile-fitz-social' },
-            { id: 'gracias', label: 'Gracias', icon: 'fa-star', fitz: 'tile-fitz-social' },
-            { id: 'si', label: 'Sí', icon: 'fa-circle-check', fitz: 'tile-fitz-social' },
-            { id: 'no', label: 'No', icon: 'fa-circle-xmark', fitz: 'tile-fitz-social' },
-
-            // Folders (Gris Carpetas)
-            { id: 'f_comida', label: 'Comida', icon: 'fa-apple-whole', isFolder: true, folderId: 'comida', fitz: 'tile-fitz-folder' },
-            { id: 'f_emociones', label: 'Emociones', icon: 'fa-face-laugh', isFolder: true, folderId: 'emociones', fitz: 'tile-fitz-folder' },
-            { id: 'f_lugares', label: 'Lugares', icon: 'fa-house', isFolder: true, folderId: 'lugares', fitz: 'tile-fitz-folder' },
-            { id: 'f_personas', label: 'Personas', icon: 'fa-users-between-lines', isFolder: true, folderId: 'personas', fitz: 'tile-fitz-folder' },
-            { id: 'f_acciones', label: 'Más Acciones', icon: 'fa-bolt', isFolder: true, folderId: 'acciones', fitz: 'tile-fitz-folder' },
-            { id: 'f_preguntas', label: 'Preguntas', icon: 'fa-circle-question', isFolder: true, folderId: 'preguntas', fitz: 'tile-fitz-folder' }
+            // Preguntas
+            { id: 'que', label: '¿Qué?', icon: 'fa-circle-question', fitz: 'fitz-teal', category: 'preguntas' },
+            { id: 'donde', label: '¿Dónde?', icon: 'fa-location-dot', fitz: 'fitz-teal', category: 'preguntas' },
+            { id: 'quien', label: '¿Quién?', icon: 'fa-user-question', fitz: 'fitz-teal', category: 'preguntas' },
+            { id: 'cuando', label: '¿Cuándo?', icon: 'fa-clock', fitz: 'fitz-teal', category: 'preguntas' }
         ];
 
-        /* Folder Specific Databases */
-        const subFolders = {
-            comida: [
-                { id: 'agua', label: 'Agua', icon: 'fa-bottle-water', fitz: 'tile-fitz-noun' },
-                { id: 'manzana', label: 'Manzana', icon: 'fa-apple-whole', fitz: 'tile-fitz-noun' },
-                { id: 'pan', label: 'Pan', icon: 'fa-bread-slice', fitz: 'tile-fitz-noun' },
-                { id: 'leche', label: 'Leche', icon: 'fa-glass-water', fitz: 'tile-fitz-noun' },
-                { id: 'jugo', label: 'Jugo', icon: 'fa-wine-glass-drop', fitz: 'tile-fitz-noun' },
-                { id: 'pizza', label: 'Pizza', icon: 'fa-pizza-slice', fitz: 'tile-fitz-noun' },
-                { id: 'galleta', label: 'Galleta', icon: 'fa-cookie', fitz: 'tile-fitz-noun' },
-                { id: 'fruta', label: 'Fruta', icon: 'fa-lemon', fitz: 'tile-fitz-noun' }
-            ],
-            emociones: [
-                { id: 'feliz', label: 'Feliz', icon: 'fa-face-laugh-beam', fitz: 'tile-fitz-adj' },
-                { id: 'triste', label: 'Triste', icon: 'fa-face-sad-tear', fitz: 'tile-fitz-adj' },
-                { id: 'cansado', label: 'Cansado', icon: 'fa-face-tired', fitz: 'tile-fitz-adj' },
-                { id: 'enojado', label: 'Enojado', icon: 'fa-face-angry', fitz: 'tile-fitz-adj' },
-                { id: 'enfermo', label: 'Enfermo', icon: 'fa-head-side-cough', fitz: 'tile-fitz-adj' },
-                { id: 'asustado', label: 'Asustado', icon: 'fa-face-flushed', fitz: 'tile-fitz-adj' },
-                { id: 'caliente', label: 'Caliente', icon: 'fa-fire', fitz: 'tile-fitz-adj' },
-                { id: 'frio', label: 'Frío', icon: 'fa-snowflake', fitz: 'tile-fitz-adj' }
-            ],
-            lugares: [
-                { id: 'casa', label: 'Casa', icon: 'fa-house', fitz: 'tile-fitz-place' },
-                { id: 'escuela', label: 'Escuela', icon: 'fa-school', fitz: 'tile-fitz-place' },
-                { id: 'parque', label: 'Parque', icon: 'fa-tree', fitz: 'tile-fitz-place' },
-                { id: 'bano', label: 'Baño', icon: 'fa-toilet', fitz: 'tile-fitz-place' },
-                { id: 'afuera', label: 'Afuera', icon: 'fa-sun', fitz: 'tile-fitz-place' },
-                { id: 'hospital', label: 'Hospital', icon: 'fa-hospital', fitz: 'tile-fitz-place' }
-            ],
-            personas: [
-                { id: 'mama', label: 'Mamá', icon: 'fa-person-dress', fitz: 'tile-fitz-people' },
-                { id: 'papa', label: 'Papá', icon: 'fa-person', fitz: 'tile-fitz-people' },
-                { id: 'profesor', label: 'Profesor', icon: 'fa-chalkboard-user', fitz: 'tile-fitz-people' },
-                { id: 'doctor', label: 'Doctor', icon: 'fa-user-doctor', fitz: 'tile-fitz-people' },
-                { id: 'hermano', label: 'Hermano', icon: 'fa-child', fitz: 'tile-fitz-people' },
-                { id: 'hermana', label: 'Hermana', icon: 'fa-child-dress', fitz: 'tile-fitz-people' }
-            ],
-            acciones: [
-                { id: 'dormir', label: 'Dormir', icon: 'fa-bed', fitz: 'tile-fitz-action' },
-                { id: 'ver', label: 'Ver', icon: 'fa-eye', fitz: 'tile-fitz-action' },
-                { id: 'escuchar', label: 'Escuchar', icon: 'fa-ear-listen', fitz: 'tile-fitz-action' },
-                { id: 'lavar', label: 'Lavar', icon: 'fa-soap', fitz: 'tile-fitz-action' },
-                { id: 'leer', label: 'Leer', icon: 'fa-book-open', fitz: 'tile-fitz-action' },
-                { id: 'necesito', label: 'Necesito', icon: 'fa-triangle-exclamation', fitz: 'tile-fitz-action' }
-            ],
-            preguntas: [
-                { id: 'que', label: '¿Qué?', icon: 'fa-circle-question', fitz: 'tile-fitz-question' },
-                { id: 'donde', label: '¿Dónde?', icon: 'fa-location-dot', fitz: 'tile-fitz-question' },
-                { id: 'cuando', label: '¿Cuándo?', icon: 'fa-clock', fitz: 'tile-fitz-question' },
-                { id: 'quien', label: '¿Quién?', icon: 'fa-circle-user', fitz: 'tile-fitz-question' },
-                { id: 'por_que', label: '¿Por qué?', icon: 'fa-circle-info', fitz: 'tile-fitz-question' },
-                { id: 'como', label: '¿Cómo?', icon: 'fa-gears', fitz: 'tile-fitz-question' }
-            ]
+        // ICON GALLERY LIBRARY FOR VISUAL PICKER
+        const ICON_GALLERY = [
+            { icon: 'fa-star', tags: 'estrella favorito inicio' },
+            { icon: 'fa-heart', tags: 'corazon amor me gusta' },
+            { icon: 'fa-user', tags: 'persona usuario yo' },
+            { icon: 'fa-users', tags: 'personas familia grupo' },
+            { icon: 'fa-house', tags: 'casa hogar lugar' },
+            { icon: 'fa-utensils', tags: 'comer comida alimentos tenedor' },
+            { icon: 'fa-glass-water', tags: 'agua beber tomar vaso' },
+            { icon: 'fa-bottle-water', tags: 'botella agua jugo' },
+            { icon: 'fa-apple-whole', tags: 'manzana fruta comida' },
+            { icon: 'fa-pizza-slice', tags: 'pizza comida fast food' },
+            { icon: 'fa-cookie', tags: 'galleta dulce comida' },
+            { icon: 'fa-bread-slice', tags: 'pan comida sandwich' },
+            { icon: 'fa-bed', tags: 'dormir cama descanso' },
+            { icon: 'fa-toilet', tags: 'bano inodoro pipi caca' },
+            { icon: 'fa-hands-wash', tags: 'lavar manos jabon higiene' },
+            { icon: 'fa-face-smile', tags: 'feliz contento sonrisa' },
+            { icon: 'fa-face-sad-tear', tags: 'triste pena llorar' },
+            { icon: 'fa-face-angry', tags: 'enojado rabia rabioso' },
+            { icon: 'fa-face-tired', tags: 'cansado sueno agotado' },
+            { icon: 'fa-gamepad', tags: 'jugar videojuego juego' },
+            { icon: 'fa-futbol', tags: 'pelota futbol jugar deporte' },
+            { icon: 'fa-music', tags: 'musica cancion sonido' },
+            { icon: 'fa-book-open', tags: 'libro leer estudiar' },
+            { icon: 'fa-pen', tags: 'escribir lapiz dibujar' },
+            { icon: 'fa-tv', tags: 'tele television mirar' },
+            { icon: 'fa-phone', tags: 'telefono llamar hablar' },
+            { icon: 'fa-thumbs-up', tags: 'si bien correcto ok' },
+            { icon: 'fa-thumbs-down', tags: 'no mal feo' },
+            { icon: 'fa-hand', tags: 'parar alto stop mano' },
+            { icon: 'fa-circle-question', tags: 'pregunta duda que como' },
+            { icon: 'fa-car', tags: 'auto coche carro ir' },
+            { icon: 'fa-bus', tags: 'colectivo autobus bus' },
+            { icon: 'fa-person-walking', tags: 'caminar ir andar' },
+            { icon: 'fa-school', tags: 'escuela colegio clase' },
+            { icon: 'fa-hospital', tags: 'hospital medico doctor' },
+            { icon: 'fa-tree', tags: 'parque plaza arbol' },
+            { icon: 'fa-dog', tags: 'perro mascota animal' },
+            { icon: 'fa-cat', tags: 'gato mascota animal' },
+            { icon: 'fa-clock', tags: 'hora tiempo reloj' },
+            { icon: 'fa-bolt', tags: 'energia fuerza accion' }
+        ];
+
+        // ==========================================
+        // 2. STATE MANAGEMENT
+        // ==========================================
+        let fullVocabulary = [];
+        let currentSentence = [];
+        let currentCategory = 'home';
+        let deferredPwaPrompt = null;
+        let speechSynth = window.speechSynthesis;
+        let availableVoices = [];
+
+        // App Settings
+        let appSettings = {
+            theme: 'system', // 'light' | 'dark' | 'system'
+            gridCols: 4,
+            voiceRate: 1.0,
+            selectedVoiceIndex: 0
         };
 
-        // Application State
-        let currentSentence = [];
-        let activeFolder = null;
-        let voices = [];
-        const synth = window.speechSynthesis;
+        // DOM References
+        const gridContainer = document.getElementById('gridContainer');
+        const sentenceStrip = document.getElementById('sentenceStrip');
+        const emptyStripPlaceholder = document.getElementById('emptyStripPlaceholder');
+        const sentenceContainer = document.getElementById('sentenceContainer');
+        const folderBreadcrumb = document.getElementById('folderBreadcrumb');
+        const searchInput = document.getElementById('searchInput');
 
-        // DOM Elements
-        const gridContainer = document.getElementById('grid-container');
-        const sentenceStrip = document.getElementById('sentence-strip');
-        const placeholderText = document.getElementById('placeholder-text');
-        const currentFolderLabel = document.getElementById('current-folder-label');
-        const searchInput = document.getElementById('search-input');
-        
         // Buttons
-        const btnSpeak = document.getElementById('btn-speak');
-        const btnBackspace = document.getElementById('btn-backspace');
-        const btnClear = document.getElementById('btn-clear');
-        const btnHome = document.getElementById('btn-home');
-        const btnSettings = document.getElementById('btn-settings');
-        const btnCloseSettings = document.getElementById('btn-close-settings');
-        const btnCloseSettingsX = document.getElementById('btn-close-settings-x');
-        const btnToggleTheme = document.getElementById('btn-toggle-theme');
-        const themeIcon = document.getElementById('theme-icon');
+        const btnSpeak = document.getElementById('btnSpeak');
+        const btnBackspace = document.getElementById('btnBackspace');
+        const btnClear = document.getElementById('btnClear');
+        const btnHome = document.getElementById('btnHome');
+        const btnQuickTheme = document.getElementById('btnQuickTheme');
+        const themeIcon = document.getElementById('themeIcon');
+        const btnInstallPwa = document.getElementById('btnInstallPwa');
 
-        // Settings Modal Elements
-        const settingsModal = document.getElementById('settings-modal');
-        const themeSelect = document.getElementById('theme-select');
-        const gridSizeSelect = document.getElementById('grid-size');
-        const voiceSelect = document.getElementById('voice-select');
-        const voiceRate = document.getElementById('voice-rate');
-        const rateValue = document.getElementById('rate-value');
-        const toggleContrast = document.getElementById('toggle-contrast');
-        const toggleInstantSpeak = document.getElementById('toggle-instant-speak');
+        // Modals
+        const modalSettings = document.getElementById('modalSettings');
+        const btnOpenSettings = document.getElementById('btnOpenSettings');
+        const btnCloseSettings = document.getElementById('btnCloseSettings');
+        
+        const modalAddCard = document.getElementById('modalAddCard');
+        const btnOpenAddModal = document.getElementById('btnOpenAddModal');
+        const btnCloseAddModal = document.getElementById('btnCloseAddModal');
+        const btnCancelAddModal = document.getElementById('btnCancelAddModal');
+        const formAddCard = document.getElementById('formAddCard');
 
-        // Theme Management
-        function applyTheme(theme) {
-            const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-            
-            if (isDark) {
-                document.documentElement.classList.add('dark');
-                themeIcon.className = 'fa-solid fa-sun text-amber-400';
+        const modalIconPicker = document.getElementById('modalIconPicker');
+        const btnOpenIconPicker = document.getElementById('btnOpenIconPicker');
+        const btnCloseIconPicker = document.getElementById('btnCloseIconPicker');
+        const iconSearchInput = document.getElementById('iconSearchInput');
+        const iconGridContainer = document.getElementById('iconGridContainer');
+
+        // ==========================================
+        // 3. INITIALIZATION & LOCAL STORAGE
+        // ==========================================
+        function initApp() {
+            loadSettings();
+            loadVocabulary();
+            applyTheme();
+            applyGridSize();
+            initVoices();
+            renderGrid();
+            setupPwa();
+        }
+
+        function loadSettings() {
+            const saved = localStorage.getItem('aac_pro_settings');
+            if (saved) {
+                try { appSettings = { ...appSettings, ...JSON.parse(saved) }; } catch(e){}
+            }
+            document.getElementById('settingGridCols').value = appSettings.gridCols;
+            document.getElementById('settingVoiceRate').value = appSettings.voiceRate;
+            document.getElementById('rateValueDisplay').textContent = `${appSettings.voiceRate}x`;
+        }
+
+        function saveSettings() {
+            localStorage.setItem('aac_pro_settings', JSON.stringify(appSettings));
+        }
+
+        function loadVocabulary() {
+            const savedCustom = localStorage.getItem('aac_pro_custom_cards');
+            let customCards = [];
+            if (savedCustom) {
+                try { customCards = JSON.parse(savedCustom); } catch(e){}
+            }
+            fullVocabulary = [...DEFAULT_VOCABULARY, ...customCards];
+        }
+
+        // ==========================================
+        // 4. THEME & VISUAL SETUP
+        // ==========================================
+        function applyTheme() {
+            const root = document.documentElement;
+            let isDark = false;
+
+            if (appSettings.theme === 'dark') {
+                isDark = true;
+            } else if (appSettings.theme === 'light') {
+                isDark = false;
             } else {
-                document.documentElement.classList.remove('dark');
-                themeIcon.className = 'fa-solid fa-moon text-indigo-500';
+                isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             }
 
-            themeSelect.value = theme;
-            localStorage.setItem('aac_theme', theme);
-        }
+            if (isDark) {
+                root.classList.add('dark');
+                themeIcon.className = 'fa-solid fa-moon text-amber-400';
+            } else {
+                root.classList.remove('dark');
+                themeIcon.className = 'fa-solid fa-sun text-amber-500';
+            }
 
-        function initTheme() {
-            const savedTheme = localStorage.getItem('aac_theme') || 'system';
-            applyTheme(savedTheme);
-        }
-
-        btnToggleTheme.addEventListener('click', () => {
-            const isCurrentlyDark = document.documentElement.classList.contains('dark');
-            applyTheme(isCurrentlyDark ? 'light' : 'dark');
-        });
-
-        themeSelect.addEventListener('change', (e) => {
-            applyTheme(e.target.value);
-        });
-
-        // Initialize Speech Voices
-        function initVoices() {
-            voices = synth.getVoices();
-            voiceSelect.innerHTML = '';
-            
-            // Prioritize Spanish voices
-            const spanishVoices = voices.filter(v => v.lang.startsWith('es'));
-            const list = spanishVoices.length > 0 ? spanishVoices : voices;
-
-            list.forEach((voice) => {
-                const opt = document.createElement('option');
-                opt.textContent = `${voice.name} (${voice.lang})`;
-                opt.value = voice.name;
-                voiceSelect.appendChild(opt);
+            // Update modal theme buttons active state
+            document.querySelectorAll('.theme-select-btn').forEach(btn => {
+                if (btn.dataset.theme === appSettings.theme) {
+                    btn.classList.add('border-indigo-600', 'bg-indigo-50', 'dark:bg-indigo-950/40', 'text-indigo-600', 'dark:text-indigo-400');
+                } else {
+                    btn.classList.remove('border-indigo-600', 'bg-indigo-50', 'dark:bg-indigo-950/40', 'text-indigo-600', 'dark:text-indigo-400');
+                }
             });
         }
 
-        if (synth.onvoiceschanged !== undefined) {
-            synth.onvoiceschanged = initVoices;
+        function applyGridSize() {
+            gridContainer.style.gridTemplateColumns = `repeat(${appSettings.gridCols}, minmax(0, 1fr))`;
         }
 
-        // Render AAC Grid Cards
-        function renderGrid(items) {
+        // ==========================================
+        // 5. VOCABULARY GRID & NAVIGATION LOGIC
+        // ==========================================
+        function renderGrid() {
             gridContainer.innerHTML = '';
-            items.forEach(item => {
-                const tile = document.createElement('button');
-                tile.className = `tile-card ${item.fitz} border-2 rounded-2xl p-3 sm:p-4 flex flex-col items-center justify-center gap-2 sm:gap-3 shadow-sm hover:shadow-md transition active:scale-95 aspect-square relative`;
-                
+            const searchTerm = searchInput.value.toLowerCase().trim();
+
+            let visibleItems = [];
+
+            if (searchTerm.length > 0) {
+                // Global search across all items
+                visibleItems = fullVocabulary.filter(item => 
+                    !item.isFolder && item.label.toLowerCase().includes(searchTerm)
+                );
+            } else {
+                // Current category view
+                visibleItems = fullVocabulary.filter(item => item.category === currentCategory);
+            }
+
+            if (visibleItems.length === 0) {
+                gridContainer.innerHTML = `
+                    <div class="col-span-full py-12 text-center text-slate-400 dark:text-slate-500">
+                        <i class="fa-solid fa-folder-open text-3xl mb-2"></i>
+                        <p class="text-sm font-semibold">No hay pictogramas en esta sección.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            visibleItems.forEach(item => {
+                const tileBtn = document.createElement('button');
+                tileBtn.type = 'button';
+                tileBtn.className = `relative flex flex-col items-center justify-center p-2 rounded-2xl border-2 shadow-sm transition-all active:scale-95 touch-manipulation min-h-[95px] sm:min-h-[110px] ${item.fitz}`;
+
                 if (item.isFolder) {
-                    tile.innerHTML = `
-                        <span class="absolute top-2 right-2 text-xs bg-slate-800/10 dark:bg-slate-100/10 px-1.5 py-0.5 rounded-md font-bold flex items-center gap-1">
-                            <i class="fa-solid fa-folder"></i>
-                        </span>
-                        <i class="fa-solid ${item.icon} text-3xl sm:text-4xl"></i>
-                        <span class="text-xs sm:text-sm font-extrabold text-center leading-tight line-clamp-2">${item.label}</span>
+                    tileBtn.innerHTML = `
+                        <i class="fa-solid ${item.icon} text-2xl sm:text-3xl mb-1.5 opacity-90"></i>
+                        <span class="font-bold text-xs sm:text-sm text-center leading-tight line-clamp-2">${item.label}</span>
+                        <span class="absolute top-2 right-2 text-[10px] opacity-60"><i class="fa-solid fa-folder"></i></span>
                     `;
                 } else {
-                    tile.innerHTML = `
-                        <i class="fa-solid ${item.icon} text-3xl sm:text-4xl"></i>
-                        <span class="text-xs sm:text-sm font-extrabold text-center leading-tight line-clamp-2">${item.label}</span>
+                    tileBtn.innerHTML = `
+                        <i class="fa-solid ${item.icon} text-2xl sm:text-3xl mb-1.5"></i>
+                        <span class="font-bold text-xs sm:text-sm text-center leading-tight line-clamp-2">${item.label}</span>
+                        ${item.isCustom ? `<button data-id="${item.id}" class="btn-delete-card absolute top-1 right-1 w-6 h-6 rounded-full bg-rose-500 text-white text-[10px] flex items-center justify-center opacity-80 hover:opacity-100"><i class="fa-solid fa-xmark"></i></button>` : ''}
                     `;
                 }
 
-                tile.addEventListener('click', () => handleTileSelection(item));
-                gridContainer.appendChild(tile);
+                tileBtn.addEventListener('click', (e) => {
+                    // Check if clicked delete custom item
+                    if (e.target.closest('.btn-delete-card')) {
+                        e.stopPropagation();
+                        deleteCustomCard(item.id);
+                        return;
+                    }
+                    handleTileSelection(item);
+                });
+
+                gridContainer.appendChild(tileBtn);
             });
         }
 
-        // Handle Tile Clicks & Auto-Return behavior
         function handleTileSelection(item) {
             if (item.isFolder) {
-                activeFolder = item.folderId;
-                currentFolderLabel.textContent = item.label;
-                renderGrid(subFolders[item.folderId] || []);
+                // Navigate into subfolder
+                currentCategory = item.folderId;
+                folderBreadcrumb.textContent = `/ ${item.label}`;
+                searchInput.value = '';
+                renderGrid();
             } else {
+                // Add to Sentence Strip
                 addToSentence(item);
 
-                if (toggleInstantSpeak.checked) {
-                    speakText(item.label);
-                }
+                // Speak individual word immediately on tap
+                speakText(item.label);
 
-                // If currently inside a subfolder, automatically return to Home
-                if (activeFolder !== null) {
-                    goHome();
+                // AUTO-RETURN TO HOME if clicked inside a subfolder
+                if (currentCategory !== 'home') {
+                    currentCategory = 'home';
+                    folderBreadcrumb.textContent = '/ Inicio';
+                    searchInput.value = '';
+                    renderGrid();
                 }
             }
         }
 
-        // Add Item to Sentence Bar
+        // ==========================================
+        // 6. SENTENCE STRIP & SPEECH SYNTHESIS
+        // ==========================================
         function addToSentence(item) {
             currentSentence.push(item);
             renderSentenceStrip();
         }
 
-        // Render Sentence Strip View
         function renderSentenceStrip() {
             sentenceStrip.innerHTML = '';
             
             if (currentSentence.length === 0) {
-                placeholderText.style.display = 'block';
-                sentenceStrip.appendChild(placeholderText);
+                sentenceStrip.appendChild(emptyStripPlaceholder);
                 return;
             }
 
-            placeholderText.style.display = 'none';
-
-            currentSentence.forEach((item) => {
+            currentSentence.forEach((item, index) => {
                 const card = document.createElement('div');
-                card.className = 'animate-pop bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl p-1.5 min-w-[62px] h-[66px] flex flex-col items-center justify-center gap-1 shadow-sm shrink-0';
+                card.className = `animate-pop-in flex flex-col items-center justify-center px-2.5 py-1 rounded-xl border-2 shadow-xs min-w-[58px] h-[62px] flex-shrink-0 ${item.fitz}`;
                 card.innerHTML = `
-                    <i class="fa-solid ${item.icon} text-lg text-slate-700 dark:text-slate-200"></i>
-                    <span class="text-[10px] font-extrabold text-slate-800 dark:text-slate-100 text-center truncate max-w-[56px]">${item.label}</span>
+                    <i class="fa-solid ${item.icon} text-lg mb-0.5"></i>
+                    <span class="font-bold text-[11px] text-center leading-tight truncate max-w-[70px]">${item.label}</span>
                 `;
                 sentenceStrip.appendChild(card);
             });
 
-            const container = document.getElementById('sentence-container');
-            container.scrollLeft = container.scrollWidth;
+            // Scroll to end of sentence strip
+            sentenceStrip.scrollLeft = sentenceStrip.scrollWidth;
         }
 
-        // Speak full sentence and auto-clear upon completion
-        function speakSentence() {
-            if (currentSentence.length === 0) return;
-            const textToSpeak = currentSentence.map(c => c.label).join(' ');
-            
-            const sentenceContainer = document.getElementById('sentence-container');
-            sentenceContainer.classList.add('speaking-active');
+        function initVoices() {
+            function populateVoices() {
+                availableVoices = speechSynth.getVoices();
+                const voiceSelect = document.getElementById('settingVoiceSelect');
+                voiceSelect.innerHTML = '';
 
-            speakText(textToSpeak, () => {
-                sentenceContainer.classList.remove('speaking-active');
-                // Automatically clear sentence strip after speaking finishes
+                // Filter Spanish voices first
+                const spanishVoices = availableVoices.filter(v => v.lang.startsWith('es'));
+                const displayVoices = spanishVoices.length > 0 ? spanishVoices : availableVoices;
+
+                displayVoices.forEach((voice, idx) => {
+                    const opt = document.createElement('option');
+                    opt.value = idx;
+                    opt.textContent = `${voice.name} (${voice.lang})`;
+                    voiceSelect.appendChild(opt);
+                });
+            }
+
+            populateVoices();
+            if (speechSynth.onvoiceschanged !== undefined) {
+                speechSynth.onvoiceschanged = populateVoices;
+            }
+        }
+
+        function speakText(text, onComplete) {
+            if (speechSynth.speaking) speechSynth.cancel();
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.rate = appSettings.voiceRate;
+
+            const voiceSelect = document.getElementById('settingVoiceSelect');
+            const selectedIdx = voiceSelect.value;
+            if (availableVoices[selectedIdx]) {
+                utterance.voice = availableVoices[selectedIdx];
+            } else {
+                const defaultEs = availableVoices.find(v => v.lang.startsWith('es'));
+                if (defaultEs) utterance.voice = defaultEs;
+            }
+
+            if (onComplete) {
+                utterance.onend = onComplete;
+                utterance.onerror = onComplete;
+            }
+
+            speechSynth.speak(utterance);
+        }
+
+        function speakFullSentence() {
+            if (currentSentence.length === 0) return;
+
+            const fullText = currentSentence.map(i => i.label).join(' ');
+            
+            // Visual pulse on sentence bar while reading
+            sentenceContainer.classList.add('speaking-pulse');
+
+            // Speak and AUTO-CLEAR post reading
+            speakText(fullText, () => {
+                sentenceContainer.classList.remove('speaking-pulse');
                 clearSentence();
             });
         }
 
-        // Speech Synthesis Wrapper
-        function speakText(text, onEndCallback) {
-            if (synth.speaking) synth.cancel();
-
-            const utterance = new SpeechSynthesisUtterance(text);
-            const selectedVoiceName = voiceSelect.value;
-            
-            if (selectedVoiceName) {
-                const match = voices.find(v => v.name === selectedVoiceName);
-                if (match) utterance.voice = match;
-            }
-
-            utterance.rate = parseFloat(voiceRate.value);
-
-            if (onEndCallback) {
-                utterance.onend = onEndCallback;
-            }
-
-            synth.speak(utterance);
-        }
-
-        // Return to Home view
-        function goHome() {
-            activeFolder = null;
-            currentFolderLabel.textContent = 'Inicio';
-            searchInput.value = '';
-            renderGrid(coreVocabulary);
-        }
-
-        // Clear Sentence Strip
         function clearSentence() {
             currentSentence = [];
             renderSentenceStrip();
         }
 
-        // Backspace action
         function backspaceSentence() {
             currentSentence.pop();
             renderSentenceStrip();
         }
 
-        // Live Search Handler across all vocabulary
-        searchInput.addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase().trim();
-            if (query === '') {
-                renderGrid(activeFolder ? subFolders[activeFolder] : coreVocabulary);
+        // ==========================================
+        // 7. CUSTOM CARD CREATOR & ICON PICKER
+        // ==========================================
+        function initCardCreatorAndPicker() {
+            const fitzPaletteBtns = document.querySelectorAll('.fitz-palette-btn');
+            const inputCardFitz = document.getElementById('inputCardFitz');
+
+            fitzPaletteBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    fitzPaletteBtns.forEach(b => b.classList.remove('ring-2', 'ring-indigo-600', 'scale-105'));
+                    btn.classList.add('ring-2', 'ring-indigo-600', 'scale-105');
+                    inputCardFitz.value = btn.dataset.fitz;
+                });
+            });
+
+            // Form Submission
+            formAddCard.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const label = document.getElementById('inputCardLabel').value.trim();
+                const category = document.getElementById('selectCardCategory').value;
+                const fitz = document.getElementById('inputCardFitz').value;
+                const icon = document.getElementById('inputCardIcon').value;
+
+                if (!label) return;
+
+                const newCard = {
+                    id: 'custom_' + Date.now(),
+                    label: label,
+                    icon: icon,
+                    fitz: fitz,
+                    category: category,
+                    isCustom: true
+                };
+
+                // Save to local storage
+                const saved = localStorage.getItem('aac_pro_custom_cards');
+                let customCards = saved ? JSON.parse(saved) : [];
+                customCards.push(newCard);
+                localStorage.setItem('aac_pro_custom_cards', JSON.stringify(customCards));
+
+                // Reload vocab and render
+                loadVocabulary();
+                renderGrid();
+
+                // Close Modal
+                modalAddCard.classList.add('hidden');
+                formAddCard.reset();
+            });
+        }
+
+        function renderIconPickerGrid(filter = '') {
+            iconGridContainer.innerHTML = '';
+            const query = filter.toLowerCase().trim();
+
+            const filtered = ICON_GALLERY.filter(item => 
+                !query || item.icon.toLowerCase().includes(query) || item.tags.toLowerCase().includes(query)
+            );
+
+            if (filtered.length === 0) {
+                iconGridContainer.innerHTML = `<div class="col-span-full py-8 text-center text-slate-400 text-xs font-semibold">No se encontraron íconos.</div>`;
                 return;
             }
 
-            let allItems = [...coreVocabulary];
-            Object.values(subFolders).forEach(list => {
-                allItems = allItems.concat(list);
+            filtered.forEach(item => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = `p-3 rounded-2xl flex items-center justify-center text-xl sm:text-2xl hover:bg-indigo-50 hover:text-indigo-600 dark:hover:bg-slate-700 border border-slate-100 dark:border-slate-700 transition-all text-slate-700 dark:text-slate-200`;
+                btn.innerHTML = `<i class="fa-solid ${item.icon}"></i>`;
+
+                btn.addEventListener('click', () => {
+                    document.getElementById('inputCardIcon').value = item.icon;
+                    document.getElementById('previewSelectedIcon').innerHTML = `<i class="fa-solid ${item.icon}"></i>`;
+                    modalIconPicker.classList.add('hidden');
+                });
+
+                iconGridContainer.appendChild(btn);
+            });
+        }
+
+        function deleteCustomCard(id) {
+            if (!confirm('¿Deseas eliminar este pictograma personalizado?')) return;
+            
+            const saved = localStorage.getItem('aac_pro_custom_cards');
+            if (saved) {
+                let customCards = JSON.parse(saved);
+                customCards = customCards.filter(c => c.id !== id);
+                localStorage.setItem('aac_pro_custom_cards', JSON.stringify(customCards));
+                loadVocabulary();
+                renderGrid();
+            }
+        }
+
+        // ==========================================
+        // 8. PROGRESSIVE WEB APP (PWA) SETUP
+        // ==========================================
+        function setupPwa() {
+            // Register Dynamic Inline Service Worker via Blob URL
+            if ('serviceWorker' in navigator) {
+                const swCode = `
+                    self.addEventListener('install', (e) => self.skipWaiting());
+                    self.addEventListener('activate', (e) => e.waitUntil(self.clients.claim()));
+                    self.addEventListener('fetch', (e) => e.respondWith(fetch(e.request).catch(() => new Response("Offline"))));
+                `;
+                const blob = new Blob([swCode], { type: 'application/javascript' });
+                navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(() => {});
+            }
+
+            // Capture beforeinstallprompt event
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPwaPrompt = e;
+                btnInstallPwa.classList.remove('hidden');
             });
 
-            const results = allItems.filter(item => 
-                !item.isFolder && item.label.toLowerCase().includes(query)
-            );
+            btnInstallPwa.addEventListener('click', async () => {
+                if (deferredPwaPrompt) {
+                    deferredPwaPrompt.prompt();
+                    const { outcome } = await deferredPwaPrompt.userChoice;
+                    if (outcome === 'accepted') {
+                        btnInstallPwa.classList.add('hidden');
+                    }
+                    deferredPwaPrompt = null;
+                }
+            });
+        }
 
-            renderGrid(results);
-        });
-
-        // Event Listeners
-        btnSpeak.addEventListener('click', speakSentence);
+        // ==========================================
+        // 9. EVENT LISTENERS
+        // ==========================================
+        // Sentence Strip Buttons
+        btnSpeak.addEventListener('click', speakFullSentence);
         btnClear.addEventListener('click', clearSentence);
         btnBackspace.addEventListener('click', backspaceSentence);
-        btnHome.addEventListener('click', goHome);
 
-        // Settings Modal Handlers
-        btnSettings.addEventListener('click', () => {
-            initVoices();
-            settingsModal.classList.remove('hidden');
-            settingsModal.classList.add('flex');
+        // Home Navigation Button
+        btnHome.addEventListener('click', () => {
+            currentCategory = 'home';
+            folderBreadcrumb.textContent = '/ Inicio';
+            searchInput.value = '';
+            renderGrid();
         });
 
-        const closeModal = () => {
-            settingsModal.classList.add('hidden');
-            settingsModal.classList.remove('flex');
-        };
-
-        btnCloseSettings.addEventListener('click', closeModal);
-        btnCloseSettingsX.addEventListener('click', closeModal);
-
-        gridSizeSelect.addEventListener('change', (e) => {
-            const val = e.target.value;
-            gridContainer.className = `grid grid-cols-${val} gap-2.5 sm:gap-4 transition-all`;
+        // Search Filter
+        searchInput.addEventListener('input', () => {
+            renderGrid();
         });
 
-        voiceRate.addEventListener('input', (e) => {
-            rateValue.textContent = `${parseFloat(e.target.value).toFixed(1)}x`;
-        });
-
-        toggleContrast.addEventListener('change', (e) => {
-            if (e.target.checked) {
-                document.body.classList.add('high-contrast');
+        // Quick Theme Switcher
+        btnQuickTheme.addEventListener('click', () => {
+            if (appSettings.theme === 'dark') {
+                appSettings.theme = 'light';
             } else {
-                document.body.classList.remove('high-contrast');
+                appSettings.theme = 'dark';
+            }
+            saveSettings();
+            applyTheme();
+        });
+
+        // Modals Management
+        btnOpenSettings.addEventListener('click', () => modalSettings.classList.remove('hidden'));
+        btnCloseSettings.addEventListener('click', () => modalSettings.classList.add('hidden'));
+
+        btnOpenAddModal.addEventListener('click', () => modalAddCard.classList.remove('hidden'));
+        btnCloseAddModal.addEventListener('click', () => modalAddCard.classList.add('hidden'));
+        btnCancelAddModal.addEventListener('click', () => modalAddCard.classList.add('hidden'));
+
+        btnOpenIconPicker.addEventListener('click', () => {
+            iconSearchInput.value = '';
+            renderIconPickerGrid();
+            modalIconPicker.classList.remove('hidden');
+        });
+        btnCloseIconPicker.addEventListener('click', () => modalIconPicker.classList.add('hidden'));
+        iconSearchInput.addEventListener('input', (e) => renderIconPickerGrid(e.target.value));
+
+        // Settings Listeners
+        document.querySelectorAll('.theme-select-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                appSettings.theme = btn.dataset.theme;
+                saveSettings();
+                applyTheme();
+            });
+        });
+
+        document.getElementById('settingGridCols').addEventListener('change', (e) => {
+            appSettings.gridCols = parseInt(e.target.value, 10);
+            saveSettings();
+            applyGridSize();
+        });
+
+        document.getElementById('settingVoiceRate').addEventListener('change', (e) => {
+            appSettings.voiceRate = parseFloat(e.target.value);
+            document.getElementById('rateValueDisplay').textContent = `${appSettings.voiceRate}x`;
+            saveSettings();
+        });
+
+        document.getElementById('btnManageCustom').addEventListener('click', () => {
+            if (confirm('¿Seguro que deseas borrar todas las tarjetas personalizadas creadas?')) {
+                localStorage.removeItem('aac_pro_custom_cards');
+                loadVocabulary();
+                renderGrid();
+                modalSettings.classList.add('hidden');
             }
         });
 
-        // Initial Initialization
-        initTheme();
-        renderGrid(coreVocabulary);
-        initVoices();
+        // START APP
+        window.addEventListener('DOMContentLoaded', initApp);
     </script>
 </body>
 </html>
