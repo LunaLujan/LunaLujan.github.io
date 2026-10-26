@@ -36,7 +36,6 @@
   </script>
 
   <style>
-    /* Estilos personalizados para la cuadrícula y animación */
     .tile-btn {
       touch-action: manipulation;
       user-select: none;
@@ -69,7 +68,6 @@
       color: #ffffff !important;
     }
 
-    /* Ocultar barra de desplazamiento manteniendo funcionalidad */
     .no-scrollbar::-webkit-scrollbar {
       display: none;
     }
@@ -84,7 +82,6 @@
   <!-- ENCABEZADO Y BARRA SUPERIOR -->
   <header class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm p-3 sticky top-0 z-20">
     <div class="max-w-6xl mx-auto flex items-center justify-between gap-2">
-      <!-- Marca y Navegación -->
       <div class="flex items-center gap-3">
         <button id="btnHome" class="flex items-center gap-2 text-blue-600 dark:text-blue-400 font-bold text-lg hover:opacity-80 transition-opacity">
           <img src="https://lunalujan.github.io/p2go/favicon.png" alt="CAA Icon" class="w-8 h-8 rounded-lg shadow-sm object-cover" onerror="this.onerror=null; this.src='https://lunalujan.github.io/p2go/favicon.png';">
@@ -95,7 +92,6 @@
         </span>
       </div>
 
-      <!-- Buscador y Acciones Rápida -->
       <div class="flex items-center gap-2 flex-1 max-w-xs sm:max-w-md mx-2">
         <div class="relative w-full">
           <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
@@ -103,7 +99,6 @@
         </div>
       </div>
 
-      <!-- Botones de Utilidades Header -->
       <div class="flex items-center gap-1.5">
         <button id="btnQuickTheme" title="Cambiar Tema" class="p-2 rounded-xl text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
           <i id="quickThemeIcon" class="fa-solid fa-moon text-lg"></i>
@@ -122,14 +117,12 @@
   <!-- TIRA DE ORACIÓN (SENTENCE STRIP) -->
   <section class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-3 shadow-inner sticky top-[57px] z-10">
     <div class="max-w-6xl mx-auto flex items-center gap-2">
-      <!-- Tira de íconos acumulados -->
       <div id="sentenceStrip" class="flex-1 flex items-center gap-2 overflow-x-auto min-h-[64px] p-1.5 bg-gray-50 dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 no-scrollbar">
         <span id="emptyStripPlaceholder" class="text-gray-400 dark:text-gray-500 text-sm italic px-3">
           Toca los pictogramas para construir una frase...
         </span>
       </div>
 
-      <!-- Botones de Control de Lectura -->
       <div class="flex items-center gap-1.5 shrink-0">
         <button id="btnSpeak" class="bg-green-600 hover:bg-green-700 active:scale-95 text-white px-4 py-3 rounded-2xl font-bold flex items-center gap-2 shadow-md transition-all">
           <i class="fa-solid fa-volume-high text-xl"></i>
@@ -148,7 +141,7 @@
   <!-- REJILLA PRINCIPAL DE PICTOGRAMAS -->
   <main class="flex-1 max-w-6xl w-full mx-auto p-3 sm:p-4">
     <div id="gridContainer" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2.5 sm:gap-4">
-      <!-- Los pictogramas se renderizan dinámicamente con JS -->
+      <!-- Los pictogramas se renderizan dinámicamente -->
     </div>
   </main>
 
@@ -165,9 +158,7 @@
         </button>
       </div>
 
-      <!-- Accesibilidad y Opciones -->
       <div class="space-y-4 text-sm">
-        <!-- Tema -->
         <div>
           <label class="font-semibold block mb-1">Tema de Interfaz</label>
           <select id="themeSelect" class="w-full bg-gray-100 dark:bg-gray-700 border-0 rounded-xl p-2.5 outline-none">
@@ -177,7 +168,6 @@
           </select>
         </div>
 
-        <!-- Alto Contraste -->
         <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700/50 rounded-2xl">
           <div>
             <span class="font-semibold block">Alto Contraste</span>
@@ -186,7 +176,6 @@
           <input type="checkbox" id="highContrastToggle" class="w-5 h-5 accent-blue-600 rounded">
         </div>
 
-        <!-- Pronunciación al Tocar -->
         <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700/50 rounded-2xl">
           <div>
             <span class="font-semibold block">Pronunciar al tocar</span>
@@ -195,7 +184,6 @@
           <input type="checkbox" id="speakOnTapToggle" class="w-5 h-5 accent-blue-600 rounded" checked>
         </div>
 
-        <!-- Borrado automático -->
         <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700/50 rounded-2xl">
           <div>
             <span class="font-semibold block">Borrar frase tras reproducir</span>
@@ -204,7 +192,6 @@
           <input type="checkbox" id="autoClearToggle" class="w-5 h-5 accent-blue-600 rounded" checked>
         </div>
 
-        <!-- Tamaño de texto -->
         <div>
           <label class="font-semibold block mb-1">Tamaño del Texto de Tarjetas</label>
           <select id="textSizeSelect" class="w-full bg-gray-100 dark:bg-gray-700 border-0 rounded-xl p-2.5 outline-none">
@@ -215,7 +202,6 @@
           </select>
         </div>
 
-        <!-- Tamaño de Rejilla (Columnas) -->
         <div>
           <label class="font-semibold block mb-1">Columnas en Pantalla</label>
           <select id="gridColsSelect" class="w-full bg-gray-100 dark:bg-gray-700 border-0 rounded-xl p-2.5 outline-none">
@@ -225,7 +211,6 @@
           </select>
         </div>
 
-        <!-- Configuración Voz y Velocidad -->
         <div class="border-t border-gray-200 dark:border-gray-700 pt-3 space-y-3">
           <h4 class="font-bold text-gray-700 dark:text-gray-300">Sintetizador de Voz</h4>
           <div>
@@ -243,7 +228,6 @@
           </div>
         </div>
 
-        <!-- Instalación PWA -->
         <div id="pwaInstallContainer" class="border-t border-gray-200 dark:border-gray-700 pt-3 hidden">
           <button id="btnPwaInstall" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl flex items-center justify-center gap-2">
             <i class="fa-solid fa-download"></i>
@@ -276,20 +260,17 @@
       <form id="cardForm" class="space-y-4 text-sm">
         <input type="hidden" id="editCardId" value="">
 
-        <!-- Etiqueta Visual -->
         <div>
           <label class="font-semibold block mb-1">Título del Pictograma *</label>
           <input type="text" id="cardTitle" required placeholder="Ej. Agua, Comer, Mamá..." class="w-full bg-gray-100 dark:bg-gray-700 border-0 rounded-xl p-3 outline-none">
         </div>
 
-        <!-- Frase a Pronunciar Alternativa -->
         <div>
           <label class="font-semibold block mb-1">Texto a Pronunciar (Opcional)</label>
           <input type="text" id="cardSpoken" placeholder="Ej. Quiero tomar un vaso de agua..." class="w-full bg-gray-100 dark:bg-gray-700 border-0 rounded-xl p-3 outline-none">
           <span class="text-xs text-gray-400 mt-1 block">Si lo dejas vacío, se pronunciará el título del pictograma.</span>
         </div>
 
-        <!-- Categoría Fitzgerald -->
         <div>
           <label class="font-semibold block mb-1">Categoría (Clave Fitzgerald) *</label>
           <select id="cardCategory" required class="w-full bg-gray-100 dark:bg-gray-700 border-0 rounded-xl p-3 outline-none">
@@ -303,11 +284,9 @@
           </select>
         </div>
 
-        <!-- SELECTOR VISUAL DUAL: ÍCONO VECTORIAL VS EMOJI -->
         <div>
           <label class="font-semibold block mb-2">Símbolo Visual *</label>
           
-          <!-- Pestañas -->
           <div class="flex border-b border-gray-200 dark:border-gray-700 mb-3">
             <button type="button" id="tabIcon" class="flex-1 py-2 font-bold text-center border-b-2 border-blue-600 text-blue-600 dark:text-blue-400">
               <i class="fa-solid fa-icons mr-1"></i> Íconos
@@ -317,13 +296,11 @@
             </button>
           </div>
 
-          <!-- Buscador de íconos/emojis -->
           <div class="relative mb-3">
             <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
             <input type="text" id="symbolSearch" placeholder="Buscar símbolo..." class="w-full pl-8 pr-3 py-2 text-xs bg-gray-100 dark:bg-gray-700 rounded-xl outline-none">
           </div>
 
-          <!-- Vista Previa Selección Actual -->
           <div class="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-2xl mb-3">
             <span class="text-xs font-medium text-gray-500">Seleccionado:</span>
             <div id="selectedSymbolPreview" class="w-10 h-10 bg-white dark:bg-gray-800 rounded-xl shadow flex items-center justify-center text-xl text-blue-600">
@@ -333,14 +310,10 @@
             <input type="hidden" id="selectedSymbolVal" value="fa-solid fa-star">
           </div>
 
-          <!-- Rejilla de Selección de Íconos -->
           <div id="iconGridContainer" class="grid grid-cols-6 gap-2 max-h-40 overflow-y-auto p-1 bg-gray-50 dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700">
-            <!-- Rellenado dinámicamente -->
           </div>
 
-          <!-- Rejilla de Selección de Emojis (Oculta por defecto) -->
           <div id="emojiGridContainer" class="grid grid-cols-6 gap-2 max-h-40 overflow-y-auto p-1 bg-gray-50 dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 hidden text-xl text-center">
-            <!-- Rellenado dinámicamente -->
           </div>
         </div>
 
@@ -356,9 +329,8 @@
     </div>
   </div>
 
-  <!-- SCRIPT LÓGICA COMPLETA DE LA APLICACIÓN -->
   <script>
-    // --- LIBRERÍA DE DATOS DE SÍMBOLOS PARA EL CREADOR ---
+    // LIBRERÍA DE SÍMBOLOS PARA CREADOR
     const ICON_LIBRARY = [
       { val: "fa-solid fa-house", name: "casa inicio" },
       { val: "fa-solid fa-user", name: "persona usuario papa yo" },
@@ -400,43 +372,75 @@
       "🚽", "🛋️", "⚽", "🎨", "🚗", "🏫", "❤️", "👍", "👎", "❓", "❗", "🖐️"
     ];
 
-    // --- BASE DE DATOS INICIAL DE PICTOGRAMAS Y CARPETAS ---
+    // --- BASE DE DATOS ESTRUCTURADA RESTABLECIDA (SISTEMA FITZGERALD PROLOQUO2GO) ---
     const INITIAL_CARDS = [
-      // Fila 1: Expresiones Básicas y Personas
+      // --- PANTALLA DE INICIO (NIVEL PRINCIPAL) ---
+      // Personas (Amarillo)
       { id: 'yo', title: 'Yo', category: 'people', symbolType: 'icon', symbolVal: 'fa-solid fa-user' },
+      { id: 'tu', title: 'Tú', category: 'people', symbolType: 'icon', symbolVal: 'fa-solid fa-user-gear' },
+      
+      // Verbos/Acciones (Verde)
       { id: 'quiero', title: 'Quiero', category: 'action', symbolType: 'icon', symbolVal: 'fa-solid fa-hand' },
+      { id: 'ir', title: 'Ir', category: 'action', symbolType: 'icon', symbolVal: 'fa-solid fa-shoe-prints' },
+      { id: 'comer', title: 'Comer', category: 'action', symbolType: 'icon', symbolVal: 'fa-solid fa-utensils' },
+
+      // Frases/Social (Rosa)
+      { id: 'hola', title: 'Hola', category: 'social', symbolType: 'icon', symbolVal: 'fa-solid fa-hand-wave' },
       { id: 'mas', title: 'Más', category: 'social', symbolType: 'icon', symbolVal: 'fa-solid fa-plus' },
       { id: 'si', title: 'Sí', category: 'social', symbolType: 'icon', symbolVal: 'fa-solid fa-thumbs-up' },
       { id: 'no', title: 'No', category: 'social', symbolType: 'icon', symbolVal: 'fa-solid fa-thumbs-down' },
+      { id: 'parar', title: 'Parar / Pará', spoken: 'Parar', category: 'social', symbolType: 'icon', symbolVal: 'fa-solid fa-circle-stop' },
 
-      // Fila 2: Carpetas de navegación
-      { id: 'f_comida', title: 'Comida', category: 'folder', symbolType: 'icon', symbolVal: 'fa-solid fa-utensils', isFolder: true, folderId: 'comida' },
-      { id: 'f_necesidades', title: 'Necesidades', category: 'folder', symbolType: 'icon', symbolVal: 'fa-solid fa-heart', isFolder: true, folderId: 'necesidades' },
+      // Carpetas de Navegación (Gris)
+      { id: 'f_personas', title: 'Personas', category: 'folder', symbolType: 'icon', symbolVal: 'fa-solid fa-users', isFolder: true, folderId: 'personas' },
       { id: 'f_acciones', title: 'Acciones', category: 'folder', symbolType: 'icon', symbolVal: 'fa-solid fa-person-running', isFolder: true, folderId: 'acciones' },
+      { id: 'f_comida', title: 'Comida', category: 'folder', symbolType: 'icon', symbolVal: 'fa-solid fa-apple-whole', isFolder: true, folderId: 'comida' },
+      { id: 'f_necesidades', title: 'Necesidades', category: 'folder', symbolType: 'icon', symbolVal: 'fa-solid fa-heart', isFolder: true, folderId: 'necesidades' },
       { id: 'f_juegos', title: 'Juegos', category: 'folder', symbolType: 'icon', symbolVal: 'fa-solid fa-gamepad', isFolder: true, folderId: 'juegos' },
       { id: 'f_lugares', title: 'Lugares', category: 'folder', symbolType: 'icon', symbolVal: 'fa-solid fa-location-dot', isFolder: true, folderId: 'lugares' },
 
-      // Subcarpeta: Comida
-      { id: 'agua', title: 'Agua', spoken: 'Quiero agua', category: 'object', symbolType: 'icon', symbolVal: 'fa-solid fa-glass-water', parentFolder: 'comida' },
+      // --- CARPETA: PERSONAS ---
+      { id: 'mama', title: 'Mamá', category: 'people', symbolType: 'icon', symbolVal: 'fa-solid fa-person-breastfeeding', parentFolder: 'personas' },
+      { id: 'papa', title: 'Papá', category: 'people', symbolType: 'icon', symbolVal: 'fa-solid fa-user-tie', parentFolder: 'personas' },
+      { id: 'familia', title: 'Familia', category: 'people', symbolType: 'icon', symbolVal: 'fa-solid fa-people-roof', parentFolder: 'personas' },
+      { id: 'amigo', title: 'Amigo', category: 'people', symbolType: 'icon', symbolVal: 'fa-solid fa-user-group', parentFolder: 'personas' },
+      { id: 'doctor', title: 'Doctor', category: 'people', symbolType: 'icon', symbolVal: 'fa-solid fa-user-doctor', parentFolder: 'personas' },
+
+      // --- CARPETA: ACCIONES ---
+      { id: 'ver_tv', title: 'Ver TV', category: 'action', symbolType: 'icon', symbolVal: 'fa-solid fa-tv', parentFolder: 'acciones' },
+      { id: 'escuchar_musica', title: 'Música', spoken: 'Escuchar música', category: 'action', symbolType: 'icon', symbolVal: 'fa-solid fa-music', parentFolder: 'acciones' },
+      { id: 'jugar', title: 'Jugar', category: 'action', symbolType: 'icon', symbolVal: 'fa-solid fa-dice-five', parentFolder: 'acciones' },
+      { id: 'ayuda', title: 'Ayuda', spoken: 'Necesito ayuda por favor', category: 'question', symbolType: 'icon', symbolVal: 'fa-solid fa-circle-question', parentFolder: 'acciones' },
+
+      // --- CARPETA: COMIDA ---
+      { id: 'agua', title: 'Agua', spoken: 'Quiero tomar agua', category: 'object', symbolType: 'icon', symbolVal: 'fa-solid fa-glass-water', parentFolder: 'comida' },
       { id: 'manzana', title: 'Manzana', category: 'object', symbolType: 'icon', symbolVal: 'fa-solid fa-apple-whole', parentFolder: 'comida' },
       { id: 'pan', title: 'Pan', category: 'object', symbolType: 'emoji', symbolVal: '🍞', parentFolder: 'comida' },
       { id: 'leche', title: 'Leche', category: 'object', symbolType: 'icon', symbolVal: 'fa-solid fa-bottle-water', parentFolder: 'comida' },
+      { id: 'galleta', title: 'Galleta', category: 'object', symbolType: 'emoji', symbolVal: '🍪', parentFolder: 'comida' },
 
-      // Subcarpeta: Necesidades
+      // --- CARPETA: NECESIDADES ---
       { id: 'bano', title: 'Ir al Baño', spoken: 'Necesito ir al baño', category: 'action', symbolType: 'icon', symbolVal: 'fa-solid fa-toilet', parentFolder: 'necesidades' },
       { id: 'dormir', title: 'Dormir', spoken: 'Tengo sueño, quiero dormir', category: 'action', symbolType: 'icon', symbolVal: 'fa-solid fa-bed', parentFolder: 'necesidades' },
       { id: 'dolor', title: 'Me duele', spoken: 'Me duele mucho', category: 'social', symbolType: 'icon', symbolVal: 'fa-solid fa-stethoscope', parentFolder: 'necesidades' },
+      { id: 'frio', title: 'Frío', spoken: 'Tengo frío', category: 'social', symbolType: 'icon', symbolVal: 'fa-solid fa-snowflake', parentFolder: 'necesidades' },
+      { id: 'calor', title: 'Calor', spoken: 'Tengo calor', category: 'social', symbolType: 'icon', symbolVal: 'fa-solid fa-sun', parentFolder: 'necesidades' },
 
-      // Subcarpeta: Acciones
-      { id: 'ver_tv', title: 'Ver TV', category: 'action', symbolType: 'icon', symbolVal: 'fa-solid fa-tv', parentFolder: 'acciones' },
-      { id: 'escuchar_musica', title: 'Música', spoken: 'Quiero escuchar música', category: 'action', symbolType: 'icon', symbolVal: 'fa-solid fa-music', parentFolder: 'acciones' },
-      { id: 'ayuda', title: 'Ayuda', spoken: 'Necesito ayuda por favor', category: 'question', symbolType: 'icon', symbolVal: 'fa-solid fa-circle-question', parentFolder: 'acciones' }
+      // --- CARPETA: JUEGOS ---
+      { id: 'pelota', title: 'Pelota', category: 'object', symbolType: 'emoji', symbolVal: '⚽', parentFolder: 'juegos' },
+      { id: 'consola', title: 'Videojuego', category: 'object', symbolType: 'icon', symbolVal: 'fa-solid fa-gamepad', parentFolder: 'juegos' },
+      { id: 'dibujar', title: 'Dibujar', category: 'action', symbolType: 'emoji', symbolVal: '🎨', parentFolder: 'juegos' },
+
+      // --- CARPETA: LUGARES ---
+      { id: 'casa', title: 'Casa', category: 'place', symbolType: 'icon', symbolVal: 'fa-solid fa-house', parentFolder: 'lugares' },
+      { id: 'escuela', title: 'Escuela', category: 'place', symbolType: 'icon', symbolVal: 'fa-solid fa-graduation-cap', parentFolder: 'lugares' },
+      { id: 'parque', title: 'Parque', category: 'place', symbolType: 'icon', symbolVal: 'fa-solid fa-tree', parentFolder: 'lugares' }
     ];
 
-    // --- ESTADO DE LA APLICACIÓN ---
+    // ESTADO DE LA APLICACIÓN
     let appState = {
       cards: [],
-      currentFolder: null, // null = Inicio
+      currentFolder: null,
       sentence: [],
       theme: localStorage.getItem('caa_theme') || 'system',
       highContrast: localStorage.getItem('caa_high_contrast') === 'true',
@@ -448,21 +452,18 @@
       speechRate: parseFloat(localStorage.getItem('caa_rate') || '1.0')
     };
 
-    // --- DEFERED PROMPT PARA INSTALACIÓN PWA ---
     let deferredPwaPrompt = null;
 
-    // --- ELEMENTOS DOM ---
+    // ELEMENTOS DOM
     const gridContainer = document.getElementById('gridContainer');
     const sentenceStrip = document.getElementById('sentenceStrip');
     const emptyStripPlaceholder = document.getElementById('emptyStripPlaceholder');
     const breadcrumb = document.getElementById('breadcrumb');
     const searchInput = document.getElementById('searchInput');
 
-    // Modales
     const settingsModal = document.getElementById('settingsModal');
     const cardModal = document.getElementById('cardModal');
 
-    // --- INICIALIZACIÓN ---
     window.addEventListener('DOMContentLoaded', () => {
       loadCards();
       setupTheme();
@@ -474,7 +475,6 @@
       registerPwaServiceWorker();
     });
 
-    // --- CARGA Y ALMACENAMIENTO DE TARJETAS ---
     function loadCards() {
       const saved = localStorage.getItem('caa_custom_cards');
       if (saved) {
@@ -492,7 +492,6 @@
       localStorage.setItem('caa_custom_cards', JSON.stringify(appState.cards));
     }
 
-    // --- SISTEMA DE TEMAS Y ALTO CONTRASTE ---
     function setupTheme() {
       const isDarkSystem = window.matchMedia('(prefers-color-scheme: dark)').matches;
       const theme = appState.theme;
@@ -505,7 +504,6 @@
         document.getElementById('quickThemeIcon').className = 'fa-solid fa-moon text-lg text-gray-600';
       }
 
-      // Aplicar Alto Contraste
       if (appState.highContrast) {
         document.body.classList.add('high-contrast');
       } else {
@@ -521,11 +519,9 @@
       document.getElementById('textSizeSelect').value = appState.textSize;
       document.getElementById('gridColsSelect').value = appState.gridCols;
       
-      // Aplicar clases de rejilla al contenedor
       gridContainer.className = `grid ${appState.gridCols} gap-2.5 sm:gap-4`;
     }
 
-    // --- SÍNTESIS DE VOZ ---
     function setupSpeech() {
       if (!('speechSynthesis' in window)) return;
 
@@ -555,7 +551,7 @@
     function speakText(text, onEndCallback = null) {
       if (!('speechSynthesis' in window) || !text) return;
 
-      window.speechSynthesis.cancel(); // Detener lecturas previas
+      window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.rate = appState.speechRate;
 
@@ -572,7 +568,6 @@
       window.speechSynthesis.speak(utterance);
     }
 
-    // --- RENDERIZADO DE LA REJILLA DE PICTOGRAMAS ---
     function renderGrid(searchTerm = '') {
       gridContainer.innerHTML = '';
 
@@ -600,7 +595,6 @@
         const tile = document.createElement('button');
         tile.className = `tile-btn flex flex-col items-center justify-center p-3 rounded-2xl shadow-sm border-2 border-black/5 dark:border-white/10 select-none relative group h-28 sm:h-36 ${getFitzgeraldColor(card.category)}`;
         
-        // Renderizar símbolo (Icono o Emoji)
         let symbolHtml = '';
         if (card.symbolType === 'emoji') {
           symbolHtml = `<span class="text-3xl sm:text-5xl my-auto">${card.symbolVal}</span>`;
@@ -608,7 +602,6 @@
           symbolHtml = `<i class="${card.symbolVal || 'fa-solid fa-star'} text-2xl sm:text-4xl text-gray-800 dark:text-gray-900 my-auto"></i>`;
         }
 
-        // Indicador de carpeta
         const folderBadge = card.isFolder ? `<i class="fa-solid fa-folder absolute top-2 right-2 text-gray-500 text-xs"></i>` : '';
 
         tile.innerHTML = `
@@ -619,14 +612,11 @@
           </span>
         `;
 
-        // Evento de clic en pictograma
         tile.addEventListener('click', () => handleTileClick(card));
-
         gridContainer.appendChild(tile);
       });
     }
 
-    // --- CLAVE FITZGERALD DE COLORES ---
     function getFitzgeraldColor(category) {
       switch (category) {
         case 'people': return 'bg-fitzgerald-people';
@@ -640,26 +630,21 @@
       }
     }
 
-    // --- MANEJO DE SELECCIÓN DE TARJETA ---
     function handleTileClick(card) {
       if (card.isFolder) {
-        // Navegar a subcarpeta
         appState.currentFolder = card.folderId;
         breadcrumb.textContent = `/ ${card.title}`;
         renderGrid();
         return;
       }
 
-      // Añadir a la tira de oración
       appState.sentence.push(card);
       renderSentenceStrip();
 
-      // Pronunciar individualmente si la opción está activa
       if (appState.speakOnTap) {
         speakText(card.spoken || card.title);
       }
 
-      // Si estábamos dentro de una subcarpeta, RETORNAR AUTOMÁTICAMENTE A INICIO
       if (appState.currentFolder) {
         appState.currentFolder = null;
         breadcrumb.textContent = '/ Inicio';
@@ -667,9 +652,7 @@
       }
     }
 
-    // --- TIRA DE ORACIÓN ---
     function renderSentenceStrip() {
-      // Limpiar contenedor
       sentenceStrip.innerHTML = '';
 
       if (appState.sentence.length === 0) {
@@ -698,18 +681,15 @@
         sentenceStrip.appendChild(itemBadge);
       });
 
-      // Scroll automático al final de la tira
       sentenceStrip.scrollLeft = sentenceStrip.scrollWidth;
     }
 
-    // --- REPRODUCTOR COMPLETO DE LA FRASE ---
     function speakFullSentence() {
       if (appState.sentence.length === 0) return;
 
       const fullText = appState.sentence.map(c => c.spoken || c.title).join(' ');
       
       speakText(fullText, () => {
-        // Callback de finalización: Borrado automático si está activo
         if (appState.autoClear) {
           appState.sentence = [];
           renderSentenceStrip();
@@ -717,13 +697,11 @@
       });
     }
 
-    // --- SELECTOR DE SÍMBOLOS (ÍCONOS / EMOJIS) EN EL MODAL ---
     function initSymbolPickers() {
       const iconGridContainer = document.getElementById('iconGridContainer');
       const emojiGridContainer = document.getElementById('emojiGridContainer');
       const symbolSearch = document.getElementById('symbolSearch');
 
-      // Renderizar Íconos
       function renderIcons(filter = '') {
         iconGridContainer.innerHTML = '';
         ICON_LIBRARY
@@ -738,7 +716,6 @@
           });
       }
 
-      // Renderizar Emojis
       function renderEmojis(filter = '') {
         emojiGridContainer.innerHTML = '';
         EMOJI_LIBRARY.forEach(emoji => {
@@ -763,7 +740,6 @@
         }
       }
 
-      // Eventos de Pestañas
       document.getElementById('tabIcon').addEventListener('click', () => {
         document.getElementById('tabIcon').className = 'flex-1 py-2 font-bold text-center border-b-2 border-blue-600 text-blue-600 dark:text-blue-400';
         document.getElementById('tabEmoji').className = 'flex-1 py-2 font-bold text-center border-b-2 border-transparent text-gray-400 hover:text-gray-600';
@@ -787,9 +763,7 @@
       renderEmojis();
     }
 
-    // --- EVENT LISTENERS GENERALES ---
     function setupEventListeners() {
-      // Botón Inicio
       document.getElementById('btnHome').addEventListener('click', () => {
         appState.currentFolder = null;
         breadcrumb.textContent = '/ Inicio';
@@ -797,12 +771,10 @@
         renderGrid();
       });
 
-      // Buscador
       searchInput.addEventListener('input', (e) => {
         renderGrid(e.target.value);
       });
 
-      // Botones Tira de Oración
       document.getElementById('btnSpeak').addEventListener('click', speakFullSentence);
       
       document.getElementById('btnBackspace').addEventListener('click', () => {
@@ -815,7 +787,6 @@
         renderSentenceStrip();
       });
 
-      // Botón Cambio Rápido de Tema
       document.getElementById('btnQuickTheme').addEventListener('click', () => {
         appState.theme = appState.theme === 'dark' ? 'light' : 'dark';
         localStorage.setItem('caa_theme', appState.theme);
@@ -823,7 +794,6 @@
         setupTheme();
       });
 
-      // Modales Abrir/Cerrar
       document.getElementById('btnSettings').addEventListener('click', () => settingsModal.classList.remove('hidden'));
       document.querySelectorAll('.closeModal').forEach(b => b.addEventListener('click', () => settingsModal.classList.add('hidden')));
 
@@ -835,7 +805,6 @@
       });
       document.querySelectorAll('.closeCardModal').forEach(b => b.addEventListener('click', () => cardModal.classList.add('hidden')));
 
-      // Guardar Ajustes
       document.getElementById('themeSelect').addEventListener('change', (e) => {
         appState.theme = e.target.value;
         localStorage.setItem('caa_theme', appState.theme);
@@ -881,7 +850,6 @@
         localStorage.setItem('caa_rate', appState.speechRate);
       });
 
-      // Formulario Crear Tarjeta
       document.getElementById('cardForm').addEventListener('submit', (e) => {
         e.preventDefault();
 
@@ -910,9 +878,7 @@
       });
     }
 
-    // --- CONFIGURACIÓN DE PWA E INSTALACIÓN EN DISPOSITIVOS ---
     function registerPwaServiceWorker() {
-      // Manifest Dinámico via Data URI con la imagen suministrada
       const manifestJSON = {
         name: "Comunicador CAA Pro",
         short_name: "CAA Pro",
@@ -937,7 +903,6 @@
       link.href = manifestURL;
       document.head.appendChild(link);
 
-      // Registrar Service Worker vía Blob
       if ('serviceWorker' in navigator) {
         const swCode = `
           self.addEventListener('install', e => self.skipWaiting());
@@ -950,7 +915,6 @@
         navigator.serviceWorker.register(swURL).catch(err => console.log('SW Registration error', err));
       }
 
-      // Evento de Instalación PWA
       window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
         deferredPwaPrompt = e;
