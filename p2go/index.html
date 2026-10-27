@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Comunicador CAA Pro</title>
   
-  <!-- Favicon / App Icon -->
+  <!-- Favicon / App Icon Logo -->
   <link rel="icon" type="image/png" href="https://lunalujan.github.io/p2go/favicon.png">
   <link rel="apple-touch-icon" href="https://lunalujan.github.io/p2go/favicon.png">
   
@@ -53,7 +53,8 @@
     }
     body.high-contrast header,
     body.high-contrast footer,
-    body.high-contrast div {
+    body.high-contrast div,
+    body.high-contrast section {
       background-color: #000000 !important;
       color: #ffffff !important;
       border-color: #ffffff !important;
@@ -82,7 +83,7 @@
   <!-- ENCABEZADO Y BARRA SUPERIOR -->
   <header class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm p-3 sticky top-0 z-20">
     <div class="max-w-6xl mx-auto flex items-center justify-between gap-2">
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2 sm:gap-3">
         <button id="btnHome" class="flex items-center gap-2 text-blue-600 dark:text-blue-400 font-bold text-lg hover:opacity-80 transition-opacity">
           <img src="https://lunalujan.github.io/p2go/favicon.png" alt="CAA Icon" class="w-8 h-8 rounded-lg shadow-sm object-cover" onerror="this.onerror=null; this.src='https://lunalujan.github.io/p2go/favicon.png';">
           <span class="hidden sm:inline">CAA Pro</span>
@@ -100,6 +101,10 @@
       </div>
 
       <div class="flex items-center gap-1.5">
+        <button id="btnToggleEditMode" title="Modo Edición" class="px-2.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-1 transition">
+          <i class="fa-solid fa-pen-to-square"></i>
+          <span id="editModeLabel" class="hidden sm:inline">Editar</span>
+        </button>
         <button id="btnQuickTheme" title="Cambiar Tema" class="p-2 rounded-xl text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
           <i id="quickThemeIcon" class="fa-solid fa-moon text-lg"></i>
         </button>
@@ -140,6 +145,10 @@
 
   <!-- REJILLA PRINCIPAL DE PICTOGRAMAS -->
   <main class="flex-1 max-w-6xl w-full mx-auto p-3 sm:p-4">
+    <div id="editBanner" class="hidden mb-3 p-2.5 bg-amber-50 dark:bg-amber-900/30 border border-amber-300 dark:border-amber-700 text-amber-800 dark:text-amber-200 rounded-xl text-xs sm:text-sm flex items-center justify-between">
+      <span><i class="fa-solid fa-circle-info mr-1.5"></i><strong>Modo Edición Activo:</strong> Presiona en <i class="fa-solid fa-pen text-blue-600"></i> para editar un pictograma o <i class="fa-solid fa-trash text-red-600"></i> para eliminar tarjetas personalizadas.</span>
+      <button id="btnCloseEditBanner" class="font-bold underline ml-2">Listo</button>
+    </div>
     <div id="gridContainer" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2.5 sm:gap-4">
       <!-- Los pictogramas se renderizan dinámicamente -->
     </div>
@@ -298,7 +307,7 @@
 
           <div class="relative mb-3">
             <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
-            <input type="text" id="symbolSearch" placeholder="Buscar símbolo..." class="w-full pl-8 pr-3 py-2 text-xs bg-gray-100 dark:bg-gray-700 rounded-xl outline-none">
+            <input type="text" id="symbolSearch" placeholder="Buscar ícono o emoji..." class="w-full pl-8 pr-3 py-2 text-xs bg-gray-100 dark:bg-gray-700 rounded-xl outline-none">
           </div>
 
           <div class="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-2xl mb-3">
@@ -310,10 +319,18 @@
             <input type="hidden" id="selectedSymbolVal" value="fa-solid fa-star">
           </div>
 
-          <div id="iconGridContainer" class="grid grid-cols-6 gap-2 max-h-40 overflow-y-auto p-1 bg-gray-50 dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700">
+          <!-- ÍCONOS CONTAINER -->
+          <div id="iconGridContainer" class="grid grid-cols-6 gap-2 max-h-44 overflow-y-auto p-1 bg-gray-50 dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700">
           </div>
 
-          <div id="emojiGridContainer" class="grid grid-cols-6 gap-2 max-h-40 overflow-y-auto p-1 bg-gray-50 dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 hidden text-xl text-center">
+          <!-- EMOJIS CONTAINER (CATEGORIZADO) -->
+          <div id="emojiPickerContainer" class="hidden flex-col gap-2">
+            <!-- Categorías de Emojis -->
+            <div id="emojiCategoryTabs" class="flex gap-1 overflow-x-auto pb-1 text-xs no-scrollbar">
+            </div>
+            <!-- Rejilla de Emojis -->
+            <div id="emojiGridContainer" class="grid grid-cols-7 gap-1.5 max-h-44 overflow-y-auto p-1.5 bg-gray-50 dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 text-xl text-center">
+            </div>
           </div>
         </div>
 
@@ -330,7 +347,7 @@
   </div>
 
   <script>
-    // LIBRERÍA DE SÍMBOLOS PARA CREADOR
+    // LIBRERÍA DE ÍCONOS
     const ICON_LIBRARY = [
       { val: "fa-solid fa-house", name: "casa inicio" },
       { val: "fa-solid fa-user", name: "persona usuario papa yo" },
@@ -362,36 +379,89 @@
       { val: "fa-solid fa-graduation-cap", name: "escuela colegio estudiar" }
     ];
 
-    const EMOJI_LIBRARY = [
-      "😀", "😃", "😄", "😁", "😆", "😅", "😂", "🙂", "🙃", "😉", "😊", "😇",
-      "🥰", "😍", "🤩", "😘", "😗", "😋", "😛", "😜", "🤪", "😝", "🤑", "🤗",
-      "🤭", "🤫", "🤔", "🤐", "🤨", "😐", "😑", "😶", "😏", "😒", "🙄", "😬",
-      "🤥", "😌", "😔", "😪", "🤤", "😴", "😷", "🤒", "🤕", "🤢", "🤮", "🤧",
-      "🥵", "🥶", "🥴", "😵", "🤯", "🤠", "🥳", "😎", "🤓", "🧐", "😕", "😟",
-      "🙁", "😮", "😯", "😲", "😳", "🥺", "😦", "😧", "📁", "🏠", "🍎", "💦",
-      "🚽", "🛋️", "⚽", "🎨", "🚗", "🏫", "❤️", "👍", "👎", "❓", "❗", "🖐️"
+    // COLECCIÓN EXPANDIDA Y CATEGORIZADA DE EMOJIS UNICODE
+    const EMOJI_CATEGORIES = [
+      {
+        id: 'faces',
+        name: 'Caras',
+        icon: '😀',
+        emojis: [
+          '😀','😃','😄','😁','😆','😅','🤣','😂','🙂','🙃','🫠','😉','😊','😇','🥰','😍','🤩','😘','😗','😚','😙','🥲','😋','😛','😜','🤪','😝','🤑','🤗','🫣','🤭','🫡','🤫','🤔','🤐','🤨','😐','😑','😶','🫥','😏','😒','🙄','😬','🤥','😌','😔','😪','🤤','😴','😷','🤒','🤕','🤢','🤮','🤧','🥵','🥶','🥴','😵','🤯','🤠','🥳','🥸','😎','🤓','🧐','😕','😟','🙁','😮','😯','😲','😳','🥺','🥹','😦','😧','😨','😰','😥','😢','😭','😱','😖','😣','😞','😓','😩','😫','🥱','😤','😡','😠','🤬','💀','💩','🤡','👹','👺','👻','👽','👾','🤖'
+        ]
+      },
+      {
+        id: 'people',
+        name: 'Personas',
+        icon: '👋',
+        emojis: [
+          '👋','🤚','🖐️','✋','🖖','👌','🤌','🤏','✌️','🤞','🫰','🤟','🤘','🤙','👈','👉','👆','🖕','👇','☝️','🫵','👍','👎','✊','👊','🤛','🤜','👏','🙌','🫶','👐','🤲','🤝','🙏','✍️','💅','🤳','💪','🦾','🦵','🦿','🦶','👂','🦻','鼻','🧠','🫀','🫁','🦷','🦴','👀','👁️','👅','👄','🫦','👶','🧒','👦','👧','🧑','👨','👩','🧑‍🦱','👨‍🦱','👩‍🦱','🧑‍🦰','👨‍🦰','👩‍🦰','👱','👱‍♂️','👱‍♀️','👴','👵','🧓','👮','🕵️','💂','🥷','👷','🤴','👸','👳','🧕','🤵','👰','🤰','🤱','👨‍🍼','👩‍🍼','🧑‍🎄','🎅','🤶','🦸','🦹','🧙','🧚','🧛','🧜','🧝','🧞','🧟','💆','💇','🚶','🏃','💃','🕺','👯','🧗','🏇','🚴','🏋️'
+        ]
+      },
+      {
+        id: 'nature',
+        name: 'Naturaleza',
+        icon: '🐶',
+        emojis: [
+          '🐶','🐱','🐭','🐹','🐰','🦊','🐻','🐼','🐻‍❄️','🐨','🐯','🦁','🐮','🐷','🐽','🐸','🐵','🙈','🙉','🙊','🐒','🐔','🐧','🐦','🐤','🐣','🐥','🦆','🦅','🦉','🦇','🐺','🐗','🐴','🦄','🐝','🪱','🐛','🦋','🐌','🐞','🐜','🪰','🪲','🪳','🦟','🦗','🕷️','🕸️','🦂','🐢','🐍','🦎','🦖','🦕','🐙','🦑','🦐','🦞','crab','🐡','🐠','🐟','🐬','🐳','🐋','🦈','🦭','🐊','🐅','🐆','zebra','🦍','🦧','🐘','🦛','🦏','🐪','🐫','🦒','🦘','🦬','🐃','🐂','🐄','🐎','🐖','🐏','🐑','🦙','🐐','🦌','🐕','🐩','🦮','🐕‍🦺','🐈','🐈‍⬛','🐓','🦃','🦤','🦚','🦜','🦩','🕊️','🐇','🦝','🦨','🦡','🦫','🦦','🦥','🐁','🐀','🐿️','🦔','🌵','🎄','🌲','🌳','🌴','🪵','🌱','🌿','☘️','🍀','🎍','🪴','🎋','🍃','🍂','🍁','🍄','🌾','💐','🌷','🌹','🥀','🪻','🌺','🌸','🌼','🌻','🌞','🌝','🌛','🌜','🌚','🌕','🌖','🌗','🌘','🌑','🌒','🌓','🌔','🌙','🌎','🌍','🌏','🪐','💫','⭐️','🌟','✨','⚡️','☄️','💥','🔥','🌪️','🌈','☀️','🌤️','⛅️','🌥️','☁️','🌦️','🌧️','⛈️','🌩️','🌨️','❄️','☃️','⛄️','🌬️','💨','💧','💦','🫧','☔️','☂️'
+        ]
+      },
+      {
+        id: 'food',
+        name: 'Comida',
+        icon: '🍏',
+        emojis: [
+          '🍏','🍎','🍐','🍊','🍋','🍌','🍉','🍇','🍓','🫐','🍈','🍒','🍑','🥭','🍍','🥥','🥝','🍅','🍆','🥑','🥦','🥬','🥒','🌶️','🫑','🌽','🥕','🫒','🧄','🧅','🥔','🍠','🥐','🥯','🍞','🥖','🥨','🧀','🥚','🍳','🧈','🥞','🧇','🥓','🥩','🍗','🍖','🦴','🌭','🍔','🍟','🍕','🫓','sandwich','🥙','🧆','🌮','🌯','🫔','salad','🥘','🫕','🥫','🍝','🍜','🍲','🍛','sushi','🍱','🥟','🦪','🍤','🍙','🍚','🍘','🍥','🥠','🥮','🍢','🍡','🍧','🍨','🍦','🥧','🧁','🍰','🎂','🍮','🍭','🍬','🍫','🍿','🍩','🍪','🌰','🥜','🍯','🥛','🍼','☕️','🍵','🧃','🥤','🧋','🍶','🍺','🍻','🥂','🍷','🥃','🍸','🍹','🧉','🍾','🧊'
+        ]
+      },
+      {
+        id: 'activities',
+        name: 'Deportes',
+        icon: '⚽',
+        emojis: [
+          '⚽️','🏀','🏈','⚾️','🥎','tennis','🏐','🏉','🥏','🎱','🪀','🏓','🏸','🏒','🏑','🥍','🏏','🪃','🥅','⛳️','kite','🏹','🎣','🤿','🥊','🥋','🎽','🛹','🛼','🛷','⛸️','🥌','🎿','⛷️','🏂','🪂','🏋️‍♂️','🏋️‍♀️','🤼‍♂️','🤼‍♀️','🤸‍♂️','🤸‍♀️','⛹️‍♂️','⛹️‍♀️','🤺','🤾‍♂️','🤾‍♀️','🏌️‍♂️','🏌️‍♀️','🏇','🧘','🏄','🏊','🤽','🚣','🧗','🚵','🚴','🏆','🥇','🥈','🥉','🏅','🎖️','🏵️','🎗️','🎫','🎟️','🎪','🤹','🎭','🩰','🎨','🎬','🎤','🎧','🎼','🎵','🎶','🥁','🎷','🎺','🎸','🪕','🎻','🎲','♟️','🎯','🎮','🎰','🧩'
+        ]
+      },
+      {
+        id: 'travel',
+        name: 'Lugares',
+        icon: '🚗',
+        emojis: [
+          '🚗','🚕','🚙','🚌','🏣','🛻','🚚','🚛','🚜','🏎️','🏍️','🛵','🛺','🚲','🛴','🛹','🛞','🚨','🚔','🚘','🚍','🚘','🚖','🛩️','✈️','🛫','🛬','🚁','🛸','🚀','🛰️','⛵️','🚤','🛥️','🛳️','⛴️','🚢','⚓️','⛽️','🚧','🚦','🚥','🚏','🗺️','🗿','🗽','🗼','🏰','🏯','🏟️','🎡','🎢','🎠','⛲️','⛱️','🏖️','🏝️','🏜️','🌋','⛰️','🏔️','🗻','🏕️','⛺️','🏠','🏡','🏢','🏣','🏥','🏦','🏨','🏪','🏫','🏬','🏭','💒','🏛️','⛪️','🕌','🕍','🛕','🕋'
+        ]
+      },
+      {
+        id: 'objects',
+        name: 'Objetos',
+        icon: '💡',
+        emojis: [
+          '⌚️','📱','📲','💻','⌨️','🖥️','🖨️','🖱️','🛜','🕹️','💽','💾','💿','DVD','📼','📷','📸','📹','🎥','📽️','🎞️','📞','☎️','📟','📠','📺','📻','🎙️','🎚️','🎛️','🧭','⏱️','⏲️','⏰','🕰️','⌛️','⏳','📡','🔋','🔌','💡','flashlight','Candle','🧯','🗑️','🛢️','🛒','💸','💵','💴','💶','💷','🪙','💰','💳','💎','⚖️','🪜','🧰','🪛','wrench','hammer','⚒️','🛠️','⛏️','🪓','microscope','telescope','📡','syringe','🩸','Pill','🩹','stethoscope','Door','🛏️','🛋️','toilet','shower','bathtub','Razor','Lotion','Safety Pin','Broom','basket','Roll of Paper','Soap','Sponge','key','🗝️','balloon','tada','🎊','gift','label','envelope','Package','pencil','✒️','📝','💼','folder','📂','calendar','bar chart','📈','📉','📜','📋','book','📚'
+        ]
+      },
+      {
+        id: 'symbols',
+        name: 'Símbolos',
+        icon: '❤️',
+        emojis: [
+          '❤️','🧡','💛','💚','💙','💜','🖤','🤍','🤎','💔','❤️‍🔥','❤️‍🩹','❣️','💕','💞','💓','💗','💖','💘','💝','💟','☮️','✝️','☪️','🕉️','☸️','✡️','🔯','🕎','☯️','☦️','🛐','⛎','♈️','♉️','♊️','♋️','♌️','♍️','♎️','♏️','♐️','♑️','♒️','♓️','🆔','⚛️','🈳','🈹','☢️','☣️','📴','📳','🈶','🈚️','🈸','🈺','🈷️','✴️','🆚','💮','🉐','㊙️','㊗️','🈴','🈵','🈲','🅰️','🅱️','🆎','🆏','🅾️','💦','💨','💫','💬','💭','🗯️','🔔','🔕','📢','📣','♿️','⚠️','⛔️','🚫','🚳','🚬','🚯','🚱','🚷','📵','🔞','⬆️','↗️','➡️','↘️','⬇️','↙️','⬅️','↖️','↕️','↔️','↩️','↪️','⤴️','⤵️','🔄','🇦R','🇪🇸','🇲🇽','🇨🇱','🇨🇴','🇵🇪','🇺🇸','🇧🇷','🇫🇷','🇮🇹','🇩🇪','🇬🇧','🇯🇵','🇨🇳'
+        ]
+      }
     ];
 
-    // --- BASE DE DATOS ESTRUCTURADA RESTABLECIDA (SISTEMA FITZGERALD PROLOQUO2GO) ---
+    // BASE DE DATOS INICIAL (SISTEMA FITZGERALD)
     const INITIAL_CARDS = [
-      // --- PANTALLA DE INICIO (NIVEL PRINCIPAL) ---
-      // Personas (Amarillo)
+      // Inicio
       { id: 'yo', title: 'Yo', category: 'people', symbolType: 'icon', symbolVal: 'fa-solid fa-user' },
       { id: 'tu', title: 'Tú', category: 'people', symbolType: 'icon', symbolVal: 'fa-solid fa-user-gear' },
-      
-      // Verbos/Acciones (Verde)
-      { id: 'quiero', title: 'Quiero', category: 'action', symbolType: 'icon', symbolVal: 'fa-solid fa-hand-holding' },
+      { id: 'quiero', title: 'Quiero', category: 'action', symbolType: 'icon', symbolVal: 'fa-solid fa-hand' },
       { id: 'ir', title: 'Ir', category: 'action', symbolType: 'icon', symbolVal: 'fa-solid fa-shoe-prints' },
       { id: 'comer', title: 'Comer', category: 'action', symbolType: 'icon', symbolVal: 'fa-solid fa-utensils' },
-
-      // Frases/Social (Rosa)
-      { id: 'hola', title: 'Hola', category: 'social', symbolType: 'icon', symbolVal: 'fa-solid fa-hand' },
+      { id: 'hola', title: 'Hola', category: 'social', symbolType: 'icon', symbolVal: 'fa-solid fa-hand-wave' },
       { id: 'mas', title: 'Más', category: 'social', symbolType: 'icon', symbolVal: 'fa-solid fa-plus' },
       { id: 'si', title: 'Sí', category: 'social', symbolType: 'icon', symbolVal: 'fa-solid fa-thumbs-up' },
       { id: 'no', title: 'No', category: 'social', symbolType: 'icon', symbolVal: 'fa-solid fa-thumbs-down' },
       { id: 'parar', title: 'Parar / Pará', spoken: 'Parar', category: 'social', symbolType: 'icon', symbolVal: 'fa-solid fa-circle-stop' },
 
-      // Carpetas de Navegación (Gris)
+      // Carpetas
       { id: 'f_personas', title: 'Personas', category: 'folder', symbolType: 'icon', symbolVal: 'fa-solid fa-users', isFolder: true, folderId: 'personas' },
       { id: 'f_acciones', title: 'Acciones', category: 'folder', symbolType: 'icon', symbolVal: 'fa-solid fa-person-running', isFolder: true, folderId: 'acciones' },
       { id: 'f_comida', title: 'Comida', category: 'folder', symbolType: 'icon', symbolVal: 'fa-solid fa-apple-whole', isFolder: true, folderId: 'comida' },
@@ -399,49 +469,46 @@
       { id: 'f_juegos', title: 'Juegos', category: 'folder', symbolType: 'icon', symbolVal: 'fa-solid fa-gamepad', isFolder: true, folderId: 'juegos' },
       { id: 'f_lugares', title: 'Lugares', category: 'folder', symbolType: 'icon', symbolVal: 'fa-solid fa-location-dot', isFolder: true, folderId: 'lugares' },
 
-      // --- CARPETA: PERSONAS ---
+      // Contenido de carpetas
       { id: 'mama', title: 'Mamá', category: 'people', symbolType: 'icon', symbolVal: 'fa-solid fa-person-breastfeeding', parentFolder: 'personas' },
       { id: 'papa', title: 'Papá', category: 'people', symbolType: 'icon', symbolVal: 'fa-solid fa-user-tie', parentFolder: 'personas' },
       { id: 'familia', title: 'Familia', category: 'people', symbolType: 'icon', symbolVal: 'fa-solid fa-people-roof', parentFolder: 'personas' },
       { id: 'amigo', title: 'Amigo', category: 'people', symbolType: 'icon', symbolVal: 'fa-solid fa-user-group', parentFolder: 'personas' },
       { id: 'doctor', title: 'Doctor', category: 'people', symbolType: 'icon', symbolVal: 'fa-solid fa-user-doctor', parentFolder: 'personas' },
 
-      // --- CARPETA: ACCIONES ---
       { id: 'ver_tv', title: 'Ver TV', category: 'action', symbolType: 'icon', symbolVal: 'fa-solid fa-tv', parentFolder: 'acciones' },
       { id: 'escuchar_musica', title: 'Música', spoken: 'Escuchar música', category: 'action', symbolType: 'icon', symbolVal: 'fa-solid fa-music', parentFolder: 'acciones' },
       { id: 'jugar', title: 'Jugar', category: 'action', symbolType: 'icon', symbolVal: 'fa-solid fa-dice-five', parentFolder: 'acciones' },
       { id: 'ayuda', title: 'Ayuda', spoken: 'Necesito ayuda por favor', category: 'question', symbolType: 'icon', symbolVal: 'fa-solid fa-circle-question', parentFolder: 'acciones' },
 
-      // --- CARPETA: COMIDA ---
       { id: 'agua', title: 'Agua', spoken: 'Quiero tomar agua', category: 'object', symbolType: 'icon', symbolVal: 'fa-solid fa-glass-water', parentFolder: 'comida' },
       { id: 'manzana', title: 'Manzana', category: 'object', symbolType: 'icon', symbolVal: 'fa-solid fa-apple-whole', parentFolder: 'comida' },
       { id: 'pan', title: 'Pan', category: 'object', symbolType: 'emoji', symbolVal: '🍞', parentFolder: 'comida' },
       { id: 'leche', title: 'Leche', category: 'object', symbolType: 'icon', symbolVal: 'fa-solid fa-bottle-water', parentFolder: 'comida' },
       { id: 'galleta', title: 'Galleta', category: 'object', symbolType: 'emoji', symbolVal: '🍪', parentFolder: 'comida' },
 
-      // --- CARPETA: NECESIDADES ---
       { id: 'bano', title: 'Ir al Baño', spoken: 'Necesito ir al baño', category: 'action', symbolType: 'icon', symbolVal: 'fa-solid fa-toilet', parentFolder: 'necesidades' },
       { id: 'dormir', title: 'Dormir', spoken: 'Tengo sueño, quiero dormir', category: 'action', symbolType: 'icon', symbolVal: 'fa-solid fa-bed', parentFolder: 'necesidades' },
       { id: 'dolor', title: 'Me duele', spoken: 'Me duele mucho', category: 'social', symbolType: 'icon', symbolVal: 'fa-solid fa-stethoscope', parentFolder: 'necesidades' },
       { id: 'frio', title: 'Frío', spoken: 'Tengo frío', category: 'social', symbolType: 'icon', symbolVal: 'fa-solid fa-snowflake', parentFolder: 'necesidades' },
       { id: 'calor', title: 'Calor', spoken: 'Tengo calor', category: 'social', symbolType: 'icon', symbolVal: 'fa-solid fa-sun', parentFolder: 'necesidades' },
 
-      // --- CARPETA: JUEGOS ---
       { id: 'pelota', title: 'Pelota', category: 'object', symbolType: 'emoji', symbolVal: '⚽', parentFolder: 'juegos' },
       { id: 'consola', title: 'Videojuego', category: 'object', symbolType: 'icon', symbolVal: 'fa-solid fa-gamepad', parentFolder: 'juegos' },
       { id: 'dibujar', title: 'Dibujar', category: 'action', symbolType: 'emoji', symbolVal: '🎨', parentFolder: 'juegos' },
 
-      // --- CARPETA: LUGARES ---
       { id: 'casa', title: 'Casa', category: 'place', symbolType: 'icon', symbolVal: 'fa-solid fa-house', parentFolder: 'lugares' },
       { id: 'escuela', title: 'Escuela', category: 'place', symbolType: 'icon', symbolVal: 'fa-solid fa-graduation-cap', parentFolder: 'lugares' },
       { id: 'parque', title: 'Parque', category: 'place', symbolType: 'icon', symbolVal: 'fa-solid fa-tree', parentFolder: 'lugares' }
     ];
 
-    // ESTADO DE LA APLICACIÓN
+    // ESTADO GENERAL
     let appState = {
       cards: [],
       currentFolder: null,
       sentence: [],
+      editMode: false,
+      currentEmojiCategory: 'faces',
       theme: localStorage.getItem('caa_theme') || 'system',
       highContrast: localStorage.getItem('caa_high_contrast') === 'true',
       speakOnTap: localStorage.getItem('caa_speak_on_tap') !== 'false',
@@ -460,15 +527,16 @@
     const emptyStripPlaceholder = document.getElementById('emptyStripPlaceholder');
     const breadcrumb = document.getElementById('breadcrumb');
     const searchInput = document.getElementById('searchInput');
-
     const settingsModal = document.getElementById('settingsModal');
     const cardModal = document.getElementById('cardModal');
+    const editBanner = document.getElementById('editBanner');
 
     window.addEventListener('DOMContentLoaded', () => {
       loadCards();
       setupTheme();
       setupAccessibility();
       setupSpeech();
+      setupEmojiPicker();
       renderGrid();
       setupEventListeners();
       initSymbolPickers();
@@ -592,8 +660,8 @@
       }
 
       filteredCards.forEach(card => {
-        const tile = document.createElement('button');
-        tile.className = `tile-btn flex flex-col items-center justify-center p-3 rounded-2xl shadow-sm border-2 border-black/5 dark:border-white/10 select-none relative group h-28 sm:h-36 ${getFitzgeraldColor(card.category)}`;
+        const tile = document.createElement('div');
+        tile.className = `tile-btn flex flex-col items-center justify-center p-3 rounded-2xl shadow-sm border-2 border-black/5 dark:border-white/10 select-none relative group h-28 sm:h-36 ${getFitzgeraldColor(card.category)} cursor-pointer`;
         
         let symbolHtml = '';
         if (card.symbolType === 'emoji') {
@@ -604,7 +672,26 @@
 
         const folderBadge = card.isFolder ? `<i class="fa-solid fa-folder absolute top-2 right-2 text-gray-500 text-xs"></i>` : '';
 
+        // Controles de Modo Edición
+        let editControls = '';
+        if (appState.editMode) {
+          const isCustom = card.id.startsWith('custom_');
+          editControls = `
+            <div class="absolute top-1.5 left-1.5 flex gap-1 z-10">
+              <button onclick="event.stopPropagation(); openEditCardModal('${card.id}')" class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs shadow hover:scale-110 transition" title="Editar">
+                <i class="fa-solid fa-pen"></i>
+              </button>
+              ${isCustom ? `
+                <button onclick="event.stopPropagation(); deleteCard('${card.id}')" class="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs shadow hover:scale-110 transition" title="Eliminar">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              ` : ''}
+            </div>
+          `;
+        }
+
         tile.innerHTML = `
+          ${editControls}
           ${folderBadge}
           ${symbolHtml}
           <span class="${appState.textSize} font-bold text-gray-900 dark:text-gray-900 text-center leading-tight line-clamp-2 mt-1">
@@ -612,7 +699,12 @@
           </span>
         `;
 
-        tile.addEventListener('click', () => handleTileClick(card));
+        tile.addEventListener('click', () => {
+          if (!appState.editMode) {
+            handleTileClick(card);
+          }
+        });
+
         gridContainer.appendChild(tile);
       });
     }
@@ -662,7 +754,7 @@
 
       appState.sentence.forEach((item, index) => {
         const itemBadge = document.createElement('div');
-        itemBadge.className = `flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-black/10 shadow-sm shrink-0 ${getFitzgeraldColor(item.category)}`;
+        itemBadge.className = `flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-black/10 shadow-sm shrink-0 cursor-pointer ${getFitzgeraldColor(item.category)}`;
         
         let symHtml = item.symbolType === 'emoji' 
           ? `<span class="text-lg">${item.symbolVal}</span>`
@@ -697,9 +789,88 @@
       });
     }
 
+    // GESTIÓN Y EDICIÓN DE PICTOGRAMAS
+    function openEditCardModal(cardId) {
+      const card = appState.cards.find(c => c.id === cardId);
+      if (!card) return;
+
+      document.getElementById('editCardId').value = card.id;
+      document.getElementById('cardTitle').value = card.title;
+      document.getElementById('cardSpoken').value = card.spoken || '';
+      document.getElementById('cardCategory').value = card.category;
+
+      selectSymbol(card.symbolType, card.symbolVal);
+
+      document.getElementById('cardModalTitle').textContent = 'Editar Pictograma';
+      cardModal.classList.remove('hidden');
+    }
+
+    function deleteCard(cardId) {
+      if (confirm('¿Deseas eliminar este pictograma personalizado?')) {
+        appState.cards = appState.cards.filter(c => c.id !== cardId);
+        saveCards();
+        renderGrid();
+      }
+    }
+
+    // PICKERS DE SÍMBOLOS & EMOJIS
+    function setupEmojiPicker() {
+      const tabsContainer = document.getElementById('emojiCategoryTabs');
+      tabsContainer.innerHTML = EMOJI_CATEGORIES.map(cat => `
+        <button type="button" onclick="selectEmojiCategory('${cat.id}')" id="cat-tab-${cat.id}" class="px-2.5 py-1 rounded-lg flex items-center gap-1 shrink-0 text-xs transition ${cat.id === appState.currentEmojiCategory ? 'bg-blue-600 text-white font-medium' : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300'}">
+          <span>${cat.icon}</span> <span>${cat.name}</span>
+        </button>
+      `).join('');
+
+      renderEmojiGrid();
+    }
+
+    function selectEmojiCategory(catId) {
+      appState.currentEmojiCategory = catId;
+      document.querySelectorAll('#emojiCategoryTabs button').forEach(btn => {
+        btn.className = 'px-2.5 py-1 rounded-lg flex items-center gap-1 shrink-0 text-xs transition bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300';
+      });
+      const activeTab = document.getElementById(`cat-tab-${catId}`);
+      if (activeTab) {
+        activeTab.className = 'px-2.5 py-1 rounded-lg flex items-center gap-1 shrink-0 text-xs transition bg-blue-600 text-white font-medium';
+      }
+      renderEmojiGrid();
+    }
+
+    function renderEmojiGrid(filterQuery = '') {
+      const grid = document.getElementById('emojiGridContainer');
+      let emojisToDisplay = [];
+
+      if (filterQuery.trim()) {
+        const allEmojis = EMOJI_CATEGORIES.flatMap(c => c.emojis);
+        emojisToDisplay = [...new Set(allEmojis)];
+      } else {
+        const cat = EMOJI_CATEGORIES.find(c => c.id === appState.currentEmojiCategory);
+        emojisToDisplay = cat ? cat.emojis : [];
+      }
+
+      grid.innerHTML = emojisToDisplay.map(e => `
+        <button type="button" onclick="selectSymbol('emoji', '${e}')" class="p-1.5 hover:bg-blue-100 dark:hover:bg-blue-900/50 rounded-lg transition transform active:scale-95 text-xl flex items-center justify-center">
+          ${e}
+        </button>
+      `).join('');
+    }
+
+    function selectSymbol(type, val) {
+      document.getElementById('selectedSymbolType').value = type;
+      document.getElementById('selectedSymbolVal').value = val;
+      
+      const preview = document.getElementById('selectedSymbolPreview');
+      if (type === 'emoji') {
+        preview.innerHTML = `<span class="text-2xl">${val}</span>`;
+      } else {
+        preview.innerHTML = `<i class="${val} text-2xl text-blue-600"></i>`;
+      }
+    }
+
     function initSymbolPickers() {
       const iconGridContainer = document.getElementById('iconGridContainer');
-      const emojiGridContainer = document.getElementById('emojiGridContainer');
+      const emojiPickerContainer = document.getElementById('emojiPickerContainer');
       const symbolSearch = document.getElementById('symbolSearch');
 
       function renderIcons(filter = '') {
@@ -716,51 +887,28 @@
           });
       }
 
-      function renderEmojis(filter = '') {
-        emojiGridContainer.innerHTML = '';
-        EMOJI_LIBRARY.forEach(emoji => {
-          const btn = document.createElement('button');
-          btn.type = 'button';
-          btn.className = 'p-2 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-blue-100 dark:hover:bg-blue-900/40 text-center text-xl';
-          btn.textContent = emoji;
-          btn.addEventListener('click', () => selectSymbol('emoji', emoji));
-          emojiGridContainer.appendChild(btn);
-        });
-      }
-
-      function selectSymbol(type, val) {
-        document.getElementById('selectedSymbolType').value = type;
-        document.getElementById('selectedSymbolVal').value = val;
-        
-        const preview = document.getElementById('selectedSymbolPreview');
-        if (type === 'emoji') {
-          preview.innerHTML = `<span class="text-2xl">${val}</span>`;
-        } else {
-          preview.innerHTML = `<i class="${val} text-2xl text-blue-600"></i>`;
-        }
-      }
-
       document.getElementById('tabIcon').addEventListener('click', () => {
         document.getElementById('tabIcon').className = 'flex-1 py-2 font-bold text-center border-b-2 border-blue-600 text-blue-600 dark:text-blue-400';
         document.getElementById('tabEmoji').className = 'flex-1 py-2 font-bold text-center border-b-2 border-transparent text-gray-400 hover:text-gray-600';
         iconGridContainer.classList.remove('hidden');
-        emojiGridContainer.classList.add('hidden');
+        emojiPickerContainer.classList.add('hidden');
       });
 
       document.getElementById('tabEmoji').addEventListener('click', () => {
         document.getElementById('tabEmoji').className = 'flex-1 py-2 font-bold text-center border-b-2 border-blue-600 text-blue-600 dark:text-blue-400';
         document.getElementById('tabIcon').className = 'flex-1 py-2 font-bold text-center border-b-2 border-transparent text-gray-400 hover:text-gray-600';
-        emojiGridContainer.classList.remove('hidden');
+        emojiPickerContainer.classList.remove('hidden');
+        emojiPickerContainer.classList.add('flex');
         iconGridContainer.classList.add('hidden');
+        setupEmojiPicker();
       });
 
       symbolSearch.addEventListener('input', (e) => {
         renderIcons(e.target.value);
-        renderEmojis(e.target.value);
+        renderEmojiGrid(e.target.value);
       });
 
       renderIcons();
-      renderEmojis();
     }
 
     function setupEventListeners() {
@@ -773,6 +921,27 @@
 
       searchInput.addEventListener('input', (e) => {
         renderGrid(e.target.value);
+      });
+
+      document.getElementById('btnToggleEditMode').addEventListener('click', () => {
+        appState.editMode = !appState.editMode;
+        const label = document.getElementById('editModeLabel');
+        const btn = document.getElementById('btnToggleEditMode');
+        
+        if (appState.editMode) {
+          label.textContent = 'Listo';
+          btn.className = 'px-2.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold bg-amber-500 text-white hover:bg-amber-600 flex items-center gap-1 transition shadow-sm';
+          editBanner.classList.remove('hidden');
+        } else {
+          label.textContent = 'Editar';
+          btn.className = 'px-2.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-1 transition';
+          editBanner.classList.add('hidden');
+        }
+        renderGrid();
+      });
+
+      document.getElementById('btnCloseEditBanner').addEventListener('click', () => {
+        document.getElementById('btnToggleEditMode').click();
       });
 
       document.getElementById('btnSpeak').addEventListener('click', speakFullSentence);
@@ -801,6 +970,7 @@
         document.getElementById('cardForm').reset();
         document.getElementById('editCardId').value = '';
         document.getElementById('cardModalTitle').textContent = 'Nuevo Pictograma';
+        selectSymbol('icon', 'fa-solid fa-star');
         cardModal.classList.remove('hidden');
       });
       document.querySelectorAll('.closeCardModal').forEach(b => b.addEventListener('click', () => cardModal.classList.add('hidden')));
@@ -853,25 +1023,40 @@
       document.getElementById('cardForm').addEventListener('submit', (e) => {
         e.preventDefault();
 
+        const editId = document.getElementById('editCardId').value;
         const title = document.getElementById('cardTitle').value.trim();
         const spoken = document.getElementById('cardSpoken').value.trim();
         const category = document.getElementById('cardCategory').value;
         const symbolType = document.getElementById('selectedSymbolType').value;
         const symbolVal = document.getElementById('selectedSymbolVal').value;
 
-        const newCard = {
-          id: 'custom_' + Date.now(),
-          title,
-          spoken: spoken || title,
-          category,
-          symbolType,
-          symbolVal,
-          parentFolder: category === 'folder' ? null : appState.currentFolder,
-          isFolder: category === 'folder',
-          folderId: category === 'folder' ? 'folder_' + Date.now() : null
-        };
+        if (editId) {
+          const index = appState.cards.findIndex(c => c.id === editId);
+          if (index !== -1) {
+            appState.cards[index] = {
+              ...appState.cards[index],
+              title,
+              spoken: spoken || title,
+              category,
+              symbolType,
+              symbolVal
+            };
+          }
+        } else {
+          const newCard = {
+            id: 'custom_' + Date.now(),
+            title,
+            spoken: spoken || title,
+            category,
+            symbolType,
+            symbolVal,
+            parentFolder: category === 'folder' ? null : appState.currentFolder,
+            isFolder: category === 'folder',
+            folderId: category === 'folder' ? 'folder_' + Date.now() : null
+          };
+          appState.cards.push(newCard);
+        }
 
-        appState.cards.push(newCard);
         saveCards();
         renderGrid();
         cardModal.classList.add('hidden');
