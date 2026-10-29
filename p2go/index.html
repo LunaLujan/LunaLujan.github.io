@@ -21,8 +21,8 @@
         extend: {
           colors: {
             fitzgerald: {
-              people: '#fef08a',    // Amarillo (Personas)
-              action: '#bbf7d0',    // Verde (Verbos)
+              people: '#fef08a',    // Amarillo (Personas/Sujetos)
+              action: '#bbf7d0',    // Verde (Verbos/Acciones)
               object: '#fed7aa',    // Naranja (Sustantivos/Objetos)
               social: '#fbcfe8',    // Rosa (Expresiones/Frases)
               question: '#99f6e4',  // Turquesa (Preguntas)
@@ -388,12 +388,12 @@
     const EMOJI_CATEGORIES = {
       faces: ["😀", "😃", "😄", "😁", "😆", "😅", "😂", "🤣", "🥲", "🥹", "☺️", "😊", "😇", "🙂", "🙃", "😉", "😌", "😍", "🥰", "😘", "😗", "😙", "😚", "😋", "😛", "😝", "😜", "🤪", "🤨", "🧐", "🤓", "😎", "🥸", "🤩", "🥳", "😏", "😒", "😞", "😔", "😟", "😕", "🙁", "☹️", "😣", "😖", "😫", "😩", "🥺", "😢", "😭", "😮‍💨", "😤", "😠", "😡", "🤬", "🤯", "😳", "🥵", "🥶", "😱", "😨", "😰", "😥", "😓", "🫣", "🤗", "🫡", "🤔", "🫣", "🤫", "🤥", "😶", "😶‍🌫️", "😐", "😑", "😬", "🫠", "🫥", "😯", "😦", "😧", "😮", "😲", "🥱", "😴", "🤤", "😪", "😵", "😵‍💫", "🤐", "🥴", "🤢", "🤮", "🤧", "😷", "🤒", "🤕", "🤑", "🤠", "😈", "👿", "👹", "👺", "🤡", "💩", "👻", "💀", "☠️", "👽", "👾", "🤖", "🎃"],
       people: ["👋", "🤚", "🖐️", "✋", "🖖", "🫱", "🫲", "🫳", "🫴", "👌", "🤌", "🤏", "✌️", "🤞", "🫰", "🤟", "🤘", "🤙", "👈", "👉", "👆", "🖕", "👇", "☝️", "🫵", "👍", "👎", "✊", "👊", "🤛", "🤜", "👏", "🙌", "🫶", "👐", "🤲", "🤝", "🙏", "✍️", "💅", "🤳", "💪", "🦾", "🦿", "🦵", "🦶", "👂", "🦻", "👃", "🧠", "🫀", "🫁", "🦷", "🦴", "👀", "👁️", "👅", "👄", "👶", "🧒", "👦", "👧", "🧑", "👱", "👨", "🧔", "👨‍🦰", "👨‍🦱", "👨‍🦳", "👨‍🦲", "👩", "👩‍🦰", "🧑‍🦰", "👩‍🦱", "🧑‍🦱", "👩‍🦳", "🧑‍🦳", "👩‍🦲", "🧑‍🦲", "👱‍♀️", "👱‍♂️", "🧓", "👴", "👵", "🙍", "🙎", "🙅", "🙆", "💁", "🙋", "🧏", "🙇", "🤦", "🤷", "🧑‍⚕️", "👨‍⚕️", "👩‍⚕️", "🧑‍🎓", "👨‍🎓", "👩‍🎓", "🧑‍🏫", "👨‍🏫", "👩‍🏫", "🧑‍⚖️", "👨‍⚖️", "👩‍⚖️", "🧑‍🌾", "👨‍🌾", "👩‍🌾", "🧑‍🍳", "👨‍🍳", "👩‍🍳", "🧑‍🔧", "👨‍🔧", "👩‍🔧", "🧑‍🏭", "👨‍🏭", "👩‍🏭", "🧑‍💼", "👨‍💼", "👩‍💼", "🧑‍🔬", "👨‍🔬", "👩‍🔬", "🧑‍💻", "👨‍💻", "👩‍💻", "🧑‍🎤", "👨‍🎤", "👩‍🎤", "🧑‍🎨", "👨‍🎨", "👩‍🎨", "🧑‍✈️", "👨‍✈️", "👩‍✈️", "🧑‍🚀", "👨‍🚀", "👩‍🚀", "🧑‍🚒", "👨‍🚒", "👩‍🚒", "👮", "👮‍♂️", "👮‍♀️", "🕵️", "🕵️‍♂️", "🕵️‍♀️", "💂", "💂‍♂️", "💂‍♀️", "🥷", "👷", "👷‍♂️", "👷‍♀️", "🫅", "🤴", "👸", "👳", "👳‍♂️", "👳‍♀️", "👲", "🧕", "🤵", "🤵‍♂️", "🤵‍♀️", "👰", "👰‍♂️", "👰‍♀️", "🤰", "🫄", "🫃", "🤱", "👩‍🍼", "👨‍🍼", "🧑‍🍼", "👼", "🎅", "🤶", "🧑‍🎄", "🦸", "🦸‍♂️", "🦸‍♀️", "🦹", "🦹‍♂️", "🦹‍♀️", "🧙", "🧙‍♂️", "🧙‍♀️", "🧚", "🧚‍♂️", "🧚‍♀️", "🧛", "🧛‍♂️", "🧛‍♀️", "🧜", "🧜‍♂️", "🧜‍♀️", "🧝", "🧝‍♂️", "🧝‍♀️", "🧞", "🧞‍♂️", "🧞‍♀️", "🧟", "🧟‍♂️", "🧟‍♀️", "🧌", "💆", "💇", "🚶", "🧍", "🧎", "🏃", "💃", "🕺", "🕴️", "👯", "🧖", "🧗", "🤺", "🏇", "⛷️", "🏂", "🏌️", "🏄", "🚣", "🏊", "⛹️", "🏋️", "🚴", "🚵", "🤸", "🤼", "🤽", "🤾", "🤹", "🧘", "🛀", "🛌", "👭", "👫", "👬", "👩‍❤️‍💋‍👨", "👨‍❤️‍💋‍👨", "👩‍❤️‍💋‍👩", "👩‍❤️‍👨", "👨‍❤️‍👨", "👩‍❤️‍👩", "👨‍👩‍👦", "👨‍👩‍👧", "👨‍👩‍👧‍👦", "👨‍👩‍👦‍👦", "👨‍👩‍👧‍👧", "👨‍👦", "👨‍👦‍👦", "👨‍👧", "👨‍👧‍👦", "👨‍👧‍👧", "👩‍👦", "👩‍👦‍👦", "👩‍👧", "👩‍👧‍👦", "👩‍👧‍👧"],
-      nature: ["🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🐻‍❄️", "🐨", "🐯", "🦁", "🐮", "🐷", "🐽", "🐸", "🐵", "🙈", "🙉", "🙊", "🐒", "🐔", "🐧", "🐦", "🐤", "🐣", "🐥", "🦆", "🦅", "🦉", "🦇", "🐺", "🐗", "🐴", "🦄", "🐝", "🪱", "🐛", "🦋", "🐌", "🐞", "🐜", "🪰", "🪲", "🪳", "🦟", "🦗", "🕷️", "🕸️", "🦂", "🐢", "🐍", "🦎", "🦖", "🦕", "🐙", "🦑", "🦐", "🦞", "🦀", "🐡", "🐠", "🐟", "🐬", "🐳", "🐋", "🦈", "🐊", "🐅", "🐆", "🦓", "🦍", "🦧", "🦣", "🐘", "🦛", "🦏", "🐪", "🐫", "🦒", "🦘", "🦬", "🐃", "🐂", "🐄", "🐎", "🐖", "🐏", "🐑", "🦙", "🐐", "🦌", "🐕", "🐩", "🦮", "🐕‍🦺", "🐈", "🐈‍⬛", "🐓", "🦃", "🦤", "🦚", "🦜", "🦩", "🕊️", "🐇", "🦝", "🦨", "🦡", "🦫", "🦦", "🦥", "🐁", "🐀", "🦔", "🐾", "🐉", "🐲", "🌵", "🎄", "🌲", "🌳", "🌴", "🪵", "🌱", "🌿", "☘️", "🍀", "🎍", "🪴", "🎋", "🍃", "🍂", "🍁", "🍄", "🐚", "🪨", "🌾", "💐", "🌷", "🌹", "🥀", "🪷", "🌺", "🌸", "🌼", "🌻", "🌞", "🌝", "🌛", "🌜", "🌚", "🌕", "🌖", "🌗", "🌘", "🌑", "🌒", "🌓", "🌔", "🌙", "🌎", "🌍", "🌏", "🪐", "💫", "⭐️", "🌟", "✨", "⚡️", "☄️", "💥", "🔥", "🌪️", "🌈", "☀️", "🌤️", "⛅️", "🌥️", "☁️", "🌦️", "🌧️", "🌩️", "🌩", "🌨️", "❄️", "☃️", "⛄️", "🌬️", "💨", "💧", "💦", "🫧", "☔️", "☂️", "🌊", "🌫️"],
-      food: ["🍏", "🍎", "🍐", "🍊", "🍋", "🍌", "🍉", "🍇", "🍓", "🫐", "🍈", "🍒", "🍑", "🥭", "🍍", "🥥", "🥝", "🍅", "🫒", "🥑", "🍆", "🥔", "🥕", "🌽", "🌶️", "🫑", "🥒", "🥬", "🥦", "🧄", "🧅", "🍄", "🥜", "🫘", "🌰", "🍞", "🥐", "🥖", "🫓", "🥨", "🥯", "🥞", "🧇", "🧀", "🍖", "🍗", "🥩", "🥓", "🍔", "🍟", "🍕", "🌭", "🥪", "🌮", "🌯", "🫔", "🥙", "🧆", "🥚", "🍳", "🥘", "🍲", "🫕", "🥣", "🥗", "🍿", "🧈", "🧂", "🥫", "🍱", "🍘", "🍙", "🍚", "🍛", "🍜", "🍝", "🍠", "🍢", "🍣", "🍤", "🍥", "🥮", "🍡", "🥟", "🥠", "🥡", "🦪", "🍦", "🍧", "🍨", "🍩", "🍪", "🎂", "🍰", "🧁", "🥧", "🍫", "🍬", "🍭", "🍮", "🍯", "🍼", "🥛", "☕️", "🫖", "🍵", "🍶", "🍾", "🍷", "🍸", "🍹", "🍺", "🍻", "🥂", "🥃", "🫗", "🥤", "🧋", "🧃", "🧉", "🧊"],
-      activity: ["⚽️", "🏀", "🏈", "⚾️", "🥎", "🎾", "🏐", "🏉", "🥏", "🎱", "🪀", "🏓", "🏸", "🏒", "🏑", "🥍", "🏏", "🪃", "🥅", "⛳️", "🪁", "🏹", "🎣", "🪝", "🤿", "🥊", "🥋", "🎽", "🛹", "🛼", "🛷", "⛸️", "🥌", "🎿", "⛷", "🏂", "🪂", "🏋️", "🤼", "🤸", "⛹️", "🤺", "🤾", "🏌️", "🏇", "🧘", "🏄", "🏊", "🤽", "🚣", "🧗", "🚵", "🚴", "🏆", "🥇", "🥈", "🥉", "🏅", "🎖️", "🏵️", "🎗️", "🎫", "🎟️", "🎪", "🤹", "🎭", "🩰", "🎨", "🎬", "🎤", "🎧", "🎼", "🎹", "🥁", "🪘", "🎷", "🎺", "🪗", "🎸", "🪕", "🎻", "🎲", "♟️", "🎯", "Bowling", "🎮", "🎰", "🧩"],
-      travel: ["🚗", "🚕", "🚙", "🚌", "🦺", "🏎️", "🚓", "🚑", "🚒", "🚐", "🛻", "🚚", "🚛", "🚜", "🦯", "🦽", "🦼", "🛴", "🚲", "🛵", "🏍️", "🛺", "🚨", "🚔", "🚍", "🚘", "🚖", "🚡", "🚠", "🚟", "🚃", "🚋", "🚞", "🚝", "🚄", "🚅", "🚆", "🚇", "🚈", "🚉", "✈️", "🛫", "🛬", "🛩️", "💺", "🛰️", "🚀", "🛸", "🚁", "🛶", "⛵️", "🚤", "🛥️", "🛳️", "⛴️", "🚢", "⚓️", "🛟", "🚧", "⛽️", "🦽", "🚨", "🚥", "🚦", "🛑", "🗺️", "🗿", "🗽", "🗼", "🏰", "🏯", "🏟️", "🎡", "🎢", "🎠", "⛲️", "⛱️", "🏖️", "🏝️", "🏜️", "🌋", "⛰️", "🏔️", "🏕️", "⛺️", "🛖", "🏠", "🏡", "🏘️", "🏚️", "🏗️", "🏭", "🏢", "🏬", "🏣", "🏤", "🏥", "🏦", "🏨", "🏪", "🏫", "🏩", "💒", "🏛️", "⛪️", "🕌", "🛕", "🕍", "🕋"],
-      objects: ["⌚️", "📱", "📲", "💻", "⌨️", "🖥️", "🖨️", "🖱️", "🖲️", "🕹️", "🗜️", "💽", "💾", "💿", "📀", "📼", "📷", "📸", "📹", "🎥", "📽️", "🎞️", "📞", "☎️", "📟", "📠", "📺", "📻", "🎙️", "🎚️", "🎛️", "🧭", "⏱️", "⏲️", "⏰", "🕰️", "⌛️", "⏳", "📡", "🔋", "🪫", "🔌", "💡", "🔦", "🕯️", "🪔", "🧯", "🛢️", "💸", "💵", "💴", "💶", "💷", "🪙", "💰", "💳", "💎", "⚖️", "🪜", "🧰", "🪛", "🔧", "🔨", "⚒️", "🛠️", "⛏️", "🪚", "🔩", "⚙️", "🪤", "🧱", "⛓️", "🧲", "🔫", "💣", "🧨", "🪓", "🔪", "🗡️", "⚔️", "🛡️", "🚬", "⚰️", "🪦", "⚱️", "🏺", "🔮", "📿", "🧿", "🪬", "💈", "⚗️", "🔭", "🔬", "🕳️", "🩹", "🩺", "🩺", "💊", "💉", "🩸", "🧬", "🦠", "🧫", "🧪", "🌡️", "🧹", "🪠", "🧺", "🧻", "🚽", "🚰", "🚿", "🛁", "🛀", "🧼", "🪥", "🪒", "🧽", "🪣", "🧴", "🔑", "🗝️", "🚪", "🪑", "🛋️", "🛏️", "🛌", "🧸", "🪆", "🖼️", "🪞", "🪟", "🛍️", "🛒", "🎁", "🎈", "🎏", "🎀", "🪄", "🪅", "🎊", "🎉", "🎎", "🏮", "🎐", "🧧", "✉️", "📩", "📨", "📬", "📫", "📦", "🏷️", "📄", "📑", "📊", "📈", "📉", "📜", "📋", "📅", "📆", "🗓️", "📇", "🗃️", "🗳️", "🗄️", "📋", "📁", "📂", "🗂️", "🗞️", "📰", "📓", "📕", "🟢", "📘", "📙", "📚", "📖", "🔖", "🧷", "🔗", "📎", "📎", "📐", "📏", "🧮", "📌", "📍", "✂️", "🖊️", "🖋️", "✒️", "🖌️", "🖍️", "📝", "✏️", "🔍", "🔎", "🔏", "🔐", "🔒", "🔓"],
-      symbols: ["❤️", "🧡", "💛", "💚", "💙", "💜", "🖤", "🤍", "🤎", "💔", "❣️", "💕", "💞", "💓", "💗", "💖", "💘", "💝", "💟", "☮️", "✝️", "☪️", "🕉️", "☸️", "✡️", "🔯", "🕎", "☯️", "☦️", "🛐", "⛎", "♈️", "♉️", "♊️", "♋️", "♌️", "♍️", "♎️", "♏️", "♐️", "♑️", "♒️", "♓️", "🆔", "⚛️", "🉑", "☢️", "☣️", "📴", "📳", "🈶", "🈚️", "🈸", "🈺", "🈷️", "✴️", "🆚", "💮", "🉐", "㊙️", "㊗️", "🈴", "🈵", "🈲", "🅰️", "🅱️", "🆎", "🆏", "🅾️", "🧏", "🅿️", "🈳", "🈲", "🆑", "🆒", "🆓", "🆔", "🆕", "🆖", "🆗", "🆘", "🆙", "🆕", "🆒", "🆓", "🚫", "❌", "⭕️", "🛑", "⛔️", "📛", "🚫", "💯", "💢", "♨️", "🚷", "🚯", "🚳", "🚱", "🔞", "📵", "🚭", "❗️", "❕", "❓", "❔", "‼️", "⁉️", "🔆", "🔅", "⚠️", "🚸", "🔱", "⚜️", "🔰", "♻️", "✅", "🈯️", "📊", "📈", "📉", "❇️", "✳️", "❎", "🌐", "💠", "Ⓜ️", "🌀", "💤", "🏧", "🚾", "♿️", "🅿️", "🛗", "🈳", "🛂", "🛃", "🛄", "🛅", "🚹", "🚺", "🚼", "⚧️", "🚻", "🚮", "🎦", "📶", "🈁", "🔣", "ℹ️", "🔤", "🔡", "🔠", "🆖", "🆗", "⬆️", "↗️", "➡️", "↘️", "⬇️", "↙️", "⬅️", "↖️", "↕️", "↔️", "↩️", "↪️", "⤴️", "⤵️", "🔀", "🔁", "🔂", "🔄", "🔃", "🎵", "🎶", "➕", "➖", "➗", "✖️", "🟰", "♾️", "💲", "💱", "™️", "🏷️", "©️", "®️", "👁️‍🗨️", "🏁", "🚩", "🎌", "🏴", "🏳️"]
+      nature: ["🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🐻‍❄️", "🐨", "🐯", "🦁", "🐮", "🐷", "🐽", "🐸", "🐵", "🙈", "🙉", "🙊", "🐒", "🐔", "🐧", "🐦", "🐤", "🐣", "🐥", "🦆", "🦅", "🦉", "BAT", "🐺", "🐗", "🐴", "🦄", "🐝", "🪱", "🐛", "🦋", "🐌", "🐞", "ANT", "🪰", "🪲", "🪳", "🦟", "🦗", "🕷️", "🕸️", "🦂", "🐢", "🐍", "🦎", "🦖", "🦕", "🐙", "🦑", "SHRIMP", "LOBSTER", "🦀", "🐡", "🐠", "🐟", "🐬", "🐳", "🐋", "🦈", "🐊", "🐅", "LEOPARD", "ZEBRA", "🦍", "🦧", "🦣", "ELEPHANT", "🦛", "🦏", "CAMEL", "🐫", "GIRAFFE", "🦘", "🦬", "BUFFALO", "🐂", "COW", "HORSE", "PIG", "RAM", "SHEEP", "LLAMA", "GOAT", "DEER", "DOG", "POODLE", "GUIDE DOG", "SERVICE DOG", "CAT", "BLACK CAT", "ROOSTER", "TURKEY", "DODO", "PEACOCK", "PARROT", "FLAMINGO", "DOVE", "RABBIT", "RACCOON", "SKUNK", "BADGER", "BEAVER", "OTTER", "SLOTH", "MOUSE", "RAT", "HEDGEHOG", "PAW PRINTS", "DRAGON", "DRAGON FACE", "CACTUS", "CHRISTMAS TREE", "EVERGREEN TREE", "DECDUOUS TREE", "PALM TREE", "WOOD", "SEEDLING", "HERB", "SHAMROCK", "FOUR LEAF CLOVER", "BAMBOO", "POTTED PLANT", "TANABATA TREE", "LEAF", "FALLEN LEAF", "MAPLE LEAF", "MUSHROOM", "SHELL", "ROCK", "RICE", "BOUQUET", "TULIP", "ROSE", "WILTED FLOWER", "LOTUS", "HIBISCUS", "CHERRY BLOSSOM", "BLOSSOM", "SUNFLOWER", "SUN", "FULL MOON", "CRESCENT MOON", "FIRST QUARTER MOON", "NEW MOON", "FULL MOON", "SUN", "EARTH", "GLOBE", "SUN", "SUN", "STAR", "STAR", "SPARKLES", "LIGHTNING", "COMET", "EXPLOSION", "FIRE", "TORNADO", "RAINBOW", "SUN", "SUN", "CLOUD", "CLOUD", "CLOUD", "RAIN", "RAIN", "THUNDER", "SNOW", "SNOWMAN", "SNOWMAN", "WIND", "DASH", "DROPLET", "SWEAT", "BUBBLE", "UMBRELLA", "UMBRELLA", "WAVE", "FOG"],
+      food: ["🍏", "🍎", "PEAR", "ORANGE", "LEMON", "BANANA", "WATERMELON", "GRAPES", "STRAWBERRY", "BLUEBERRIES", "MELON", "CHERRIES", "PEACH", "MANGO", "PINEAPPLE", "COCONUT", "KIWI", "TOMATO", "OLIVE", "AVOCADO", "EGGPLANT", "POTATO", "CARROT", "CORN", "HOT PEPPER", "BELL PEPPER", "CUCUMBER", "LEAFY GREEN", "BROCCOLI", "GARLIC", "ONION", "MUSHROOM", "PEANUTS", "BEANS", "CHESTNUT", "BREAD", "CROISSANT", "BAGUETTE", "FLATBREAD", "PRETZEL", "BAGEL", "PANCAKES", "WAFFLE", "CHEESE", "MEAT", "POULTRY", "STEAK", "BACON", "HAMBURGER", "FRIES", "PIZZA", "HOTDOG", "SANDWICH", "TACO", "BURRITO", "TAMALE", "FALAFEL", "FALAFEL", "EGG", "COOKING", "PAN OF FOOD", "POT OF FOOD", "FONDUE", "BOWL", "SALAD", "POPCORN", "BUTTER", "SALT", "CANNED FOOD", "BENTO", "RICE CRACKER", "RICE BALL", "RICE", "CURRY", "RAMEN", "SPAGHETTI", "SWEET POTATO", "ODEN", "SUSHI", "FRIED SHRIMP", "FISH CAKE", "MOON CAKE", "DANGO", "DUMPLING", "FORTUNE COOKIE", "TAKEOUT", "OYSTER", "ICE CREAM", "SHAVED ICE", "ICE CREAM", "DONUT", "COOKIE", "CAKE", "SHORTCAKE", "CUPCAKE", "PIE", "CHOCOLATE", "CANDY", "LOLLIPOP", "CUSTARD", "HONEY", "BABY BOTTLE", "MILK", "COFFEE", "TEA", "TEA", "SAKE", "CHAMPAGNE", "WINE", "COCKTAIL", "TROPICAL DRINK", "BEER", "BEERS", "CLINK", "WHISKEY", "POUR", "JUICE", "BOBA", "JUICE", "MATE", "ICE"],
+      activity: ["⚽️", "🏀", "🏈", "⚾️", "🥎", "TENNIS", "VOLLEYBALL", "RUGBY", "FRISBEE", "8BALL", "YOYO", "PING PONG", "BADMINTON", "HOCKEY", "FIELD HOCKEY", "LACROSSE", "CRICKET", "BOOMERANG", "GOAL", "GOLF", "KITE", "BOW", "FISHING", "HOOK", "DIVING", "BOXING", "MARTIAL ARTS", "RUNNING SHIRT", "SKATEBOARD", "ROLLER SKATE", "SLED", "ICE SKATE", "CURLING", "SKI", "SKI", "SNOWBOARD", "PARACHUTE", "WEIGHT LIFTING", "WRESTLING", "GYMNASTICS", "BASKETBALL", "FENCING", "HANDBALL", "GOLF", "HORSE RIDING", "YOGA", "SURFING", "SWIMMING", "WATER POLO", "ROWING", "CLIMBING", "MOUNTAIN BIKING", "BIKING", "TROPHY", "1ST", "2ND", "3RD", "MEDAL", "MILITARY MEDAL", "ROSETTE", "RIBBON", "TICKET", "TICKETS", "CIRCUS", "JUGGLING", "THEATER", "BALLET", "ART", "CLAPPER", "MICROPHONE", "HEADPHONES", "SCORE", "PIANO", "DRUM", "DRUM", "SAXOPHONE", "TRUMPET", "ACCORDION", "GUITAR", "BANJO", "VIOLIN", "GAME DIE", "CHESS", "DART", "BOWLING", "GAME", "SLOT MACHINE", "PUZZLE"],
+      travel: ["🚗", "TAXI", "SUV", "BUS", "SAFETY VEST", "RACE CAR", "POLICE CAR", "AMBULANCE", "FIRE ENGINE", "MINIBUS", "PICKUP", "TRUCK", "LORRY", "TRACTOR", "CANES", "WHEELCHAIR", "MOTORIZED WHEELCHAIR", "SCOOTER", "BICYCLE", "MOTOR SCOOTER", "MOTORCYCLE", "AUTO RICKSHAW", "SIREN", "POLICE CAR", "BUS", "CAR", "TAXI", "AERIAL TRAMWAY", "MOUNTAIN CABLEWAY", "SUSPENSION RAILWAY", "RAILWAY CAR", "TRAM", "MONORAIL", "MOUNTAIN RAILWAY", "TRAIN", "BULLET TRAIN", "TRAIN", "METRO", "LIGHT RAIL", "STATION", "AIRPLANE", "DEPARTURE", "ARRIVAL", "AIRPLANE", "SEAT", "SATELLITE", "ROCKET", "UFO", "HELICOPTER", "CANOE", "SAILBOAT", "SPEEDBOAT", "MOTOR BOAT", "PASSENGER SHIP", "FERRY", "SHIP", "ANCHOR", "LIFEBUOY", "CONSTRUCTION", "FUEL PUMP", "WHEELCHAIR", "SIREN", "TRAFFIC LIGHT", "TRAFFIC LIGHT", "STOP", "MAP", "MOAI", "STATUE", "TOKYO TOWER", "CASTLE", "CASTLE", "STADIUM", "FERRIS WHEEL", "ROLLER COASTER", "CAROUSEL", "FOUNTAIN", "UMBRELLA", "BEACH", "ISLAND", "DESERT", "VOLCANO", "MOUNTAIN", "MOUNTAIN", "CAMPING", "TENT", "HUT", "HOUSE", "HOUSE WITH GARDEN", "HOUSES", "DERELICT HOUSE", "BUILDING", "FACTORY", "OFFICE", "DEPARTMENT STORE", "POST OFFICE", "POST OFFICE", "HOSPITAL", "BANK", "HOTEL", "CONVENIENCE STORE", "SCHOOL", "LOVE HOTEL", "WEDDING", "CLASSICAL BUILDING", "CHURCH", "MOSQUE", "HINDU TEMPLE", "SYNAGOGUE", "KAABA"],
+      objects: ["⌚️", "PHONE", "PHONE", "LAPTOP", "KEYBOARD", "COMPUTER", "PRINTER", "MOUSE", "TRACKBALL", "JOYSTICK", "CLAMP", "MINIDISC", "FLOPPY DISK", "CD", "DVD", "VHS", "CAMERA", "FLASH CAMERA", "VIDEO CAMERA", "MOVIE CAMERA", "FILM PROJECTOR", "FILM STRIP", "TELEPHONE", "PHONE", "PAGER", "FAX", "TV", "RADIO", "STUDIO MICROPHONE", "LEVEL SLIDER", "CONTROL KNOBS", "COMPASS", "STOPWATCH", "TIMER", "ALARM CLOCK", "MANTELPIECE CLOCK", "HOURGLASS", "HOURGLASS", "SATELLITE ANTENNA", "BATTERY", "LOW BATTERY", "PLUG", "BULB", "FLASHLIGHT", "CANDLE", "DIYA LAMP", "EXTINGUISHER", "OIL DRUM", "MONEY WITH WINGS", "DOLLAR", "YEN", "EURO", "POUND", "COIN", "MONEY BAG", "CREDIT CARD", "GEM", "BALANCE SCALE", "LADDER", "TOOLBOX", "SCREWDRIVER", "WRENCH", "HAMMER", "HAMMER AND PICK", "HAMMER AND WRENCH", "PICK", "SAW", "NUT AND BOLT", "GEAR", "MOUSETRAP", "BRICK", "CHAINS", "MAGNET", "PISTOL", "BOMB", "FIRECRACKER", "AXE", "KNIFE", "DAGGER", "SWORDS", "SHIELD", "SMOKING", "COFFIN", "HEADSTONE", "URN", "AMPHORA", "CRYSTAL BALL", "PRAYER BEADS", "NAZAR AMULET", "HAMSA", "BARBER", "ALEMBIC", "TELESCOPE", "MICROSCOPE", "HOLE", "ADHESIVE BANDAGE", "STETHOSCOPE", "STETHOSCOPE", "PILL", "SYRINGE", "DROP OF BLOOD", "DNA", "MICROBE", "PETRI DISH", "TEST TUBE", "THERMOMETER", "BROOM", "PLUNGER", "BASKET", "ROLL OF PAPER", "TOILET", "POTABLE WATER", "SHOWER", "BATHTUB", "BATH", "SOAP", "TOOTHBRUSH", "RAZOR", "SPONGE", "BUCKET", "LOTION", "KEY", "OLD KEY", "DOOR", "CHAIR", "SOFA", "BED", "BED", "TEDDY BEAR", "NESTING DOLLS", "PICTURE", "MIRROR", "WINDOW", "SHOPPING BAGS", "SHOPPING CART", "GIFT", "BALLOON", "CARP STREAMER", "RIBBON", "MAGIC WAND", "PINATA", "CONFETTI", "PARTY POPPER", "DOLLS", "RED LANTERN", "WIND CHIME", "RED ENVELOPE", "ENVELOPE", "ENVELOPE WITH ARROW", "INCOMING ENVELOPE", "MAILBOX", "MAILBOX", "PACKAGE", "LABEL", "PAGE", "BOOKMARK TABS", "BAR CHART", "CHART INCREASING", "CHART DECREASING", "SCROLL", "CLIPBOARD", "CALENDAR", "CALENDAR", "SPIRAL CALENDAR", "CARD INDEX", "CARD INDEX BOX", "BALLOT BOX", "FILE CABINET", "CLIPBOARD", "FILE FOLDER", "OPEN FOLDER", "CARD INDEX DIVIDERS", "NEWSPAPER", "NEWSPAPER", "NOTEBOOK", "BOOK", "BOOK", "BOOK", "BOOK", "BOOKS", "OPEN BOOK", "BOOKMARK", "SAFETY PIN", "LINK", "PAPERCLIP", "PAPERCLIPS", "TRIANGULAR RULER", "STRAIGHT RULER", "ABACUS", "PUSHPIN", "ROUND PUSHPIN", "SCISSORS", "PEN", "FOUNTAIN PEN", "NIB", "PAINTBRUSH", "CRAYON", "MEMO", "PENCIL", "MAGNIFYING GLASS", "MAGNIFYING GLASS", "PRIVACY", "LOCKED", "LOCK", "UNLOCKED"],
+      symbols: ["❤️", "🧡", "💛", "GREEN HEART", "BLUE HEART", "PURPLE HEART", "BLACK HEART", "WHITE HEART", "BROWN HEART", "BROKEN HEART", "EXCLAMATION HEART", "TWO HEARTS", "REVOLVING HEARTS", "BEATING HEART", "GROWING HEART", "SPARKLING HEART", "HEART WITH ARROW", "HEART WITH RIBBON", "HEART DECORATION", "PEACE", "CROSS", "STAR AND CRESCENT", "OM", "WHEEL OF DHARMA", "STAR OF DAVID", "SIX POINTED STAR", "MENORAH", "YIN YANG", "ORTHODOX CROSS", "PLACE OF WORSHIP", "OPHIUCHUS", "ARIES", "TAURUS", "GEMINI", "CANCER", "LEO", "VIRGO", "LIBRA", "SCORPIUS", "SAGITTARIUS", "CAPRICORN", "AQUARIUS", "PISCES", "ID", "ATOM", "ACCEPT", "RADIOACTIVE", "BIOHAZARD", "MOBILE OFF", "VIBRATION", "JAPANESE", "JAPANESE", "JAPANESE", "JAPANESE", "JAPANESE", "EIGHT POINTED STAR", "VS", "FLOWER", "JAPANESE", "JAPANESE", "JAPANESE", "JAPANESE", "JAPANESE", "JAPANESE", "A", "B", "AB", "CL", "O", "DISABILITY", "P", "JAPANESE", "JAPANESE", "CL", "COOL", "FREE", "ID", "NEW", "NG", "OK", "SOS", "UP", "NEW", "COOL", "FREE", "PROHIBITED", "CROSS MARK", "O MARK", "STOP", "NO ENTRY", "NAME BADGE", "PROHIBITED", "100", "ANGER", "HOT SPRINGS", "NO PEDESTRIANS", "NO LITTERING", "NO BICYCLES", "NON POTABLE WATER", "UNDER 18", "NO PHONES", "NO SMOKING", "EXCLAMATION", "EXCLAMATION", "QUESTION", "QUESTION", "DOUBLE EXCLAMATION", "EXCLAMATION QUESTION", "BRIGHTNESS", "DIM", "WARNING", "CHILDREN CROSSING", "TRIDENT", "FLEUR DE LIS", "BEGINNER", "RECYCLE", "CHECK", "JAPANESE", "BAR CHART", "CHART INCREASING", "CHART DECREASING", "SPARKLE", "EIGHT SPOKED ASTERISK", "CROSS MARK BUTTON", "GLOBE", "DIAMOND", "CIRCLED M", "CYCLONE", "ZZZ", "ATM", "WATER CLOSET", "WHEELCHAIR", "PARKING", "ELEVATOR", "JAPANESE", "PASSPORT CONTROL", "CUSTOMS", "BAGGAGE CLAIM", "LEFT LUGGAGE", "MEN", "WOMEN", "BABY", "TRANSGENDER", "RESTROOM", "TRASH", "CINEMA", "SIGNAL", "JAPANESE", "SYMBOLS", "INFO", "ABC", "ABCD", "CAPS", "NG", "OK", "UP", "UP RIGHT", "RIGHT", "DOWN RIGHT", "DOWN", "DOWN LEFT", "LEFT", "UP LEFT", "UP DOWN", "LEFT RIGHT", "LEFT ARROW", "RIGHT ARROW", "UP ARROW", "DOWN ARROW", "SHUFFLE", "REPEAT", "REPEAT ONE", "COUNTERCLOCKWISE", "CLOCKWISE", "MUSICAL NOTE", "MUSICAL NOTES", "PLUS", "MINUS", "DIVIDE", "MULTIPLY", "EQUAL", "INFINITY", "DOLLAR", "CURRENCY", "TRADEMARK", "TAG", "COPYRIGHT", "REGISTERED", "EYE IN SPEECH BUBBLE", "CHEQUERED FLAG", "TRIANGULAR FLAG", "CROSSED FLAGS", "BLACK FLAG", "WHITE FLAG"]
     };
 
     // BASE DE DATOS INICIAL RESTABLECIDA
@@ -615,23 +615,23 @@
 
         const folderBadge = card.isFolder ? `<i class="fa-solid fa-folder absolute top-2 right-2 text-gray-500 text-xs"></i>` : '';
 
-        // Controles adicionales en Modo Edición
+        // OVERLAY MODO EDICIÓN CON CONTROLES EN LAS 4 ESQUINAS
         let editOverlay = '';
         if (appState.editMode) {
           editOverlay = `
-            <div class="absolute inset-0 bg-black/40 backdrop-blur-[1px] rounded-2xl flex flex-col justify-between p-1.5 z-10">
-              <!-- Reordenar Flechas -->
-              <div class="flex justify-between w-full">
-                <button class="move-left-btn bg-white/90 dark:bg-gray-800/90 text-gray-800 dark:text-white w-6 h-6 rounded-lg text-xs font-bold flex items-center justify-center shadow" title="Mover izquierda">◄</button>
-                <button class="move-right-btn bg-white/90 dark:bg-gray-800/90 text-gray-800 dark:text-white w-6 h-6 rounded-lg text-xs font-bold flex items-center justify-center shadow" title="Mover derecha">►</button>
+            <div class="absolute inset-0 bg-black/40 backdrop-blur-[1px] rounded-2xl flex flex-col justify-between p-1.5 z-10 pointer-events-none">
+              <!-- Esquinas Superiores: Flechas Reordenamiento -->
+              <div class="flex justify-between w-full pointer-events-auto">
+                <button class="move-left-btn bg-white/90 dark:bg-gray-800/90 text-gray-800 dark:text-white w-6 h-6 rounded-lg text-xs font-bold flex items-center justify-center shadow hover:bg-white transition-colors" title="Mover izquierda">◄</button>
+                <button class="move-right-btn bg-white/90 dark:bg-gray-800/90 text-gray-800 dark:text-white w-6 h-6 rounded-lg text-xs font-bold flex items-center justify-center shadow hover:bg-white transition-colors" title="Mover derecha">►</button>
               </div>
 
-              <!-- Editar / Eliminar -->
-              <div class="flex justify-center gap-1.5 w-full">
-                <button class="edit-card-btn bg-blue-600 text-white w-7 h-7 rounded-xl text-xs flex items-center justify-center shadow" title="Editar">
+              <!-- Esquinas Inferiores: Editar y Eliminar -->
+              <div class="flex justify-between w-full pointer-events-auto">
+                <button class="edit-card-btn bg-blue-600 hover:bg-blue-700 text-white w-6 h-6 rounded-lg text-xs flex items-center justify-center shadow transition-colors" title="Editar">
                   <i class="fa-solid fa-pen"></i>
                 </button>
-                <button class="delete-card-btn bg-red-600 text-white w-7 h-7 rounded-xl text-xs flex items-center justify-center shadow" title="Eliminar">
+                <button class="delete-card-btn bg-red-600 hover:bg-red-700 text-white w-6 h-6 rounded-lg text-xs flex items-center justify-center shadow transition-colors" title="Eliminar">
                   <i class="fa-solid fa-trash"></i>
                 </button>
               </div>
@@ -648,13 +648,11 @@
           </span>
         `;
 
-        // Eventos de Clic o Drag/Drop
         tile.addEventListener('click', (e) => {
-          if (appState.editMode) return; // En modo edición no emite palabra al tocar
+          if (appState.editMode) return;
           handleTileClick(card);
         });
 
-        // Eventos Modo Edición (Botones Flechas, Editar y Eliminar)
         if (appState.editMode) {
           const moveLeftBtn = tile.querySelector('.move-left-btn');
           const moveRightBtn = tile.querySelector('.move-right-btn');
@@ -681,7 +679,6 @@
             deleteCard(card);
           });
 
-          // Drag and Drop
           tile.addEventListener('dragstart', (e) => {
             draggedItemIndex = appState.cards.findIndex(c => c.id === card.id);
             tile.classList.add('tile-dragging');
@@ -899,7 +896,6 @@
         renderEmojis();
       });
 
-      // Navegación Pestañas Emojis
       document.querySelectorAll('.emoji-cat-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
           document.querySelectorAll('.emoji-cat-btn').forEach(b => b.className = 'emoji-cat-btn px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-gray-700 shrink-0');
@@ -920,7 +916,6 @@
     }
 
     function setupEventListeners() {
-      // Activar / Desactivar Modo Edición
       document.getElementById('btnEditMode').addEventListener('click', () => {
         appState.editMode = !appState.editMode;
         const btn = document.getElementById('btnEditMode');
@@ -1023,7 +1018,6 @@
         localStorage.setItem('caa_rate', appState.speechRate);
       });
 
-      // Guardar / Editar Pictograma
       document.getElementById('cardForm').addEventListener('submit', (e) => {
         e.preventDefault();
 
@@ -1035,7 +1029,6 @@
         const symbolVal = document.getElementById('selectedSymbolVal').value;
 
         if (editId) {
-          // Edición de tarjeta existente
           const cardIndex = appState.cards.findIndex(c => c.id === editId);
           if (cardIndex !== -1) {
             appState.cards[cardIndex].title = title;
@@ -1045,7 +1038,6 @@
             appState.cards[cardIndex].symbolVal = symbolVal;
           }
         } else {
-          // Nueva tarjeta
           const newCard = {
             id: 'custom_' + Date.now(),
             title,
